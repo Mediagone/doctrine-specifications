@@ -1,0 +1,31 @@
+{
+    "name": "mediagone/ddd-doctrine-specifications",
+    "type": "library",
+    "description": "Doctrine implementation of repository Specifications pattern",
+    "keywords": ["doctrine", "repository", "specifications", "orm", "database"],
+    "license": "MIT",
+    "authors": [
+        {"name": "Bruce Suire", "role": "Developer"}
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Mediagone\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Mediagone\\DDD\\Doctrine\\Specifications\\": "tests/Unit/"
+        }
+    },
+    "require": {
+        "php": "^7.4",
+        "doctrine/orm": "^2.7",
+        "symfony/var-dumper": "^5.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    }
+}
