@@ -12,7 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mediagone\\": "src/"
+            "Mediagone\\DDD\\Doctrine\\Specifications\\": "src/"
         }
     },
     "autoload-dev": {
