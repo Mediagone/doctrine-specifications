@@ -33,11 +33,11 @@ $ composer require mediagone/ddd-doctrine-specifications
 
 ## Introduction
 
-The classic _Repository pattern_ – a single class per entity with several methods, one for each query – quickly shows its limitations as it grows toward a messy god-class.
+The classic _Repository pattern_ (a single class per entity with several methods, one per query) quickly shows its limitations as it grows toward a messy god-class.
 
-Using [Query Functions](https://ocramius.github.io/doctrine-best-practices/#/90) partially solves the problem but you might still get a lot of code duplication. Things get worse if query critera can be combined arbitrarily, which may result in the creation of an exponential number of classes.
+Using _[Query Functions](https://ocramius.github.io/doctrine-best-practices/#/90)_ partially solves the problem by splitting up queries into separate classes, but you might still get a lot of code duplication. Things get worse if query critera can be combined arbitrarily, which may result in the creation of an exponential number of classes.
 
-The [Specifications pattern](https://en.wikipedia.org/wiki/Specification_pattern) comes to the rescue helping you to split them into explicit and reusable filters, improving useability and testability of your database queries. This package is a customized flavor of this pattern, inspired by Benjamin Eberlei's [article](https://beberlei.de/2013/03/04/doctrine_repositories.html). It revolves around a simple concept: specifications. Each specification defines a set of criteria that will be automatically applied to Doctrine's QueryBuilder and Query objects.
+The _[Specifications pattern](https://en.wikipedia.org/wiki/Specification_pattern)_ comes to the rescue helping you to split them into explicit and reusable filters, improving useability and testability of your database queries. This package is a customized flavor of this pattern, inspired by Benjamin Eberlei's [article](https://beberlei.de/2013/03/04/doctrine_repositories.html). It revolves around a simple concept: specifications. Each specification defines a set of criteria that will be automatically applied to Doctrine's QueryBuilder and Query objects.
 ```php
 interface Specification
 {
