@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Mediagone\DDD\Doctrine\Specifications;
+namespace Mediagone\Doctrine\Specifications;
 
 
 final class SpecificationRepositoryResult

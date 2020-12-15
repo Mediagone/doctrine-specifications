@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Mediagone\DDD\Doctrine\Specifications;
+namespace Tests\Mediagone\Doctrine\Specifications;
 
-use Mediagone\DDD\Doctrine\Specifications\SpecificationRepositoryResult;
+use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
 use PHPUnit\Framework\TestCase;
 
 

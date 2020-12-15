@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Mediagone\DDD\Doctrine\Specifications;
+namespace Tests\Mediagone\Doctrine\Specifications;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
-use Mediagone\DDD\Doctrine\Specifications\Specification;
+use Mediagone\Doctrine\Specifications\Specification;
 
 
 final class FakeEmptySpecification implements Specification

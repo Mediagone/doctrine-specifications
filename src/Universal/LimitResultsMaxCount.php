@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Mediagone\DDD\Doctrine\Specifications\Universal;
+namespace Mediagone\Doctrine\Specifications\Universal;
 
-use Mediagone\DDD\Doctrine\Specifications\Specification;
+use Mediagone\Doctrine\Specifications\Specification;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;

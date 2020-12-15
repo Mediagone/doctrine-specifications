@@ -1,5 +1,5 @@
 {
-    "name": "mediagone/ddd-doctrine-specifications",
+    "name": "mediagone/doctrine-specifications",
     "type": "library",
     "description": "Doctrine implementation of repository Specifications pattern",
     "keywords": ["doctrine", "repository", "specifications", "orm", "database"],
@@ -12,12 +12,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Mediagone\\DDD\\Doctrine\\Specifications\\": "src/"
+            "Mediagone\\Doctrine\\Specifications\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Mediagone\\DDD\\Doctrine\\Specifications\\": "tests/Unit/"
+            "Tests\\Mediagone\\Doctrine\\Specifications\\": "tests/Unit/"
         }
     },
     "require": {

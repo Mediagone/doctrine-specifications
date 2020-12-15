@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Mediagone\DDD\Doctrine\Specifications;
+namespace Mediagone\Doctrine\Specifications;
 
 use InvalidArgumentException;
-use Mediagone\DDD\Doctrine\Specifications\Universal\DebugDumpDQL;
-use Mediagone\DDD\Doctrine\Specifications\Universal\DebugDumpSQL;
+use Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL;
+use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
 use function in_array;
 
 

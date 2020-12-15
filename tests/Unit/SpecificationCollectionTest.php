@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Mediagone\DDD\Doctrine\Specifications;
+namespace Tests\Mediagone\Doctrine\Specifications;
 
 use InvalidArgumentException;
-use Mediagone\DDD\Doctrine\Specifications\SpecificationRepositoryResult;
-use Mediagone\DDD\Doctrine\Specifications\Universal\DebugDumpDQL;
-use Mediagone\DDD\Doctrine\Specifications\Universal\DebugDumpSQL;
+use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
+use Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL;
+use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
 use PHPUnit\Framework\TestCase;
 
 

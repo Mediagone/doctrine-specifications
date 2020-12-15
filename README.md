@@ -1,4 +1,4 @@
-# DDD - Doctrine specifications
+# Doctrine specifications
 
 ⚠️ _This project is in experimental phase, the API may change any time._
 
@@ -28,7 +28,7 @@ This package requires **PHP 7.4+** and Doctrine **ORM 2.7+**
 Add it as Composer dependency:
 
 ```sh
-$ composer require mediagone/ddd-doctrine-specifications
+$ composer require mediagone/doctrine-specifications
 ```
 
 ## Introduction
@@ -305,13 +305,13 @@ Specification queries are best used through a _Query bus_, that suits very well 
 
 ## License
 
-_DDD Doctrine Specifications_ is licensed under MIT license. See LICENSE file.
+_Doctrine Specifications_ is licensed under MIT license. See LICENSE file.
 
 
 
-[ico-version]: https://img.shields.io/packagist/v/mediagone/ddd-doctrine-specifications.svg
-[ico-downloads]: https://img.shields.io/packagist/dt/mediagone/ddd-doctrine-specifications.svg
+[ico-version]: https://img.shields.io/packagist/v/mediagone/doctrine-specifications.svg
+[ico-downloads]: https://img.shields.io/packagist/dt/mediagone/doctrine-specifications.svg
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg
 
-[link-packagist]: https://packagist.org/packages/mediagone/ddd-doctrine-specifications
-[link-downloads]: https://packagist.org/packages/mediagone/ddd-doctrine-specifications
+[link-packagist]: https://packagist.org/packages/mediagone/doctrine-specifications
+[link-downloads]: https://packagist.org/packages/mediagone/doctrine-specifications

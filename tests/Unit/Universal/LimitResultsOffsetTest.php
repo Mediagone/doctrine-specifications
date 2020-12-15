@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Mediagone\DDD\Doctrine\Specifications\Universal;
+namespace Tests\Mediagone\Doctrine\Specifications\Universal;
 
 use InvalidArgumentException;
-use Mediagone\DDD\Doctrine\Specifications\Specification;
-use Mediagone\DDD\Doctrine\Specifications\Universal\LimitResultsOffset;
+use Mediagone\Doctrine\Specifications\Specification;
+use Mediagone\Doctrine\Specifications\Universal\LimitResultsOffset;
 use PHPUnit\Framework\TestCase;
 
 
