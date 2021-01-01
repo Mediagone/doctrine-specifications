@@ -68,7 +68,7 @@ Each method splits the query into separate specifications:
 - maxCount => `LimitMaxCount` specification
 
 ### SpecificationCollection class
-First, we need to create our main class that will be updated later in our example. It extends`SpecificationCollection` that provides a simple specification registration mechanism, we'll see that in details right after.
+First, we need to create our main class that will be updated later in our example. It extends `SpecificationCollection` which provides a simple specification registration mechanism, we'll see that in details right after.
 
 ```php
 final class ManyArticle extends SpecificationCollection
@@ -95,7 +95,7 @@ final class SelectArticleEntity implements Specification
     }
 }
 ```
-Let's register it in our collection:
+Let's register it in our specification collection:
 ```php
 final class ManyArticle extends SpecificationCollection
 {
@@ -105,7 +105,10 @@ final class ManyArticle extends SpecificationCollection
     }
 }
 ```
-Notice we used a _static factory method_ because collections must be initialized with a repository result format, which is closely related to our "select" specification.
+_Notes:_ 
+- Each SpecificationCollection must be initialized with an _initial specification_ and a _repository result format_, both being closely related.
+- The SpecificationCollection's constructor is protected to enforce the usage of [static factory methods](https://medium.com/javarevisited/static-factory-methods-an-alternative-to-public-constructors-73cbe8b9fda), because descriptive naming is more meaningful about what the specifications will return.
+
 
 
 ### Filtering specifications
