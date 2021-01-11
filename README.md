@@ -84,7 +84,7 @@ final class ManyArticle extends SpecificationCollection
 ### SelectArticleEntity specification
 Our first specification defines the selected entity in our query builder:
 ```php
-namespace App\Blog\Query\Article\Specifications; // Example namespace, choose what fits best to your project
+namespace App\Blog\Query\Article\Specifications; // Example namespace
 use App\Blog\Article; // Assumed FQCN of your entity
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -106,7 +106,7 @@ final class SelectArticleEntity implements Specification
 ```
 Let's register it in our specification collection:
 ```php
-use App\Blog\Query\Article\Specifications\SelectArticleEntity; // Previously chosen specification's namespace
+use App\Blog\Query\Article\Specifications\SelectArticleEntity; // Previously chosen namespace
 use Mediagone\Doctrine\Specifications\SpecificationCollection;
 use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
 
@@ -321,7 +321,10 @@ $articles = $repository->find(
 
 Specification queries are best used through a _Query bus_, that suits very well with DDD, however it's not a hard requirement. You can easily tweak your own adapter for any bus or another kind of service.
 
-Your query classes might extend `SpecificationCollection`, making them automatically handleable by a dedicated bus middleware. If you're looking for a bus package (or just want to see how it's done), you can use [mediagone/cqrs-bus](https://github.com/Mediagone/cqrs-bus) which proposes a `SpecificationQuery` base class and the ` SpecificationQueryFetcher` middleware.
+Your query classes might extend `SpecificationCollection`, making them automatically handleable by a dedicated bus middleware.
+
+If you're looking for a bus package (or just want to see how it's done), you can use [mediagone/cqrs-bus](https://github.com/Mediagone/cqrs-bus) which proposes a `SpecificationQuery` base class and the ` SpecificationQueryFetcher` middleware.
+
 
 
 ## License
