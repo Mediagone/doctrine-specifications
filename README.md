@@ -226,7 +226,7 @@ final class ManyArticle extends SpecificationCollection
 
 ### Execute the query
 
-Finally, we can easily retrieve results according to our specification collection:
+Finally, we can easily retrieve results according to our specification collection, by using the `SpecificationRepository` class (which fully replaces traditional Doctrine repositories):
 ```php
 use Mediagone\Doctrine\Specifications\SpecificationRepository;
 
@@ -258,7 +258,7 @@ The package allows results to get retrieved in different formats:
 - SINGLE_OBJECT : returns a **single hydrated object** or **null** (similar to `getOneOrNullResult()`)
 - SINGLE_SCALAR : returns a **single scalar** (similar to `getSingleScalarResult()`)
 
-Thereby, you can use the same specifications for different result types, by adding multiple _static factory methods_ in a collection.
+Thereby, you can use the same specifications for different result types (count, DTOs...) by adding multiple _static factory methods_ in a collection.
 ```php
 final class ManyArticle extends SpecificationCollection
 {
@@ -320,6 +320,8 @@ $articles = $repository->find(
 ### Command bus
 
 Specification queries are best used through a _Query bus_, that suits very well with DDD, however it's not a hard requirement. You can easily tweak your own adapter for any bus or another kind of service.
+
+Your query classes might extend `SpecificationCollection`, making them automatically handleable by a dedicated bus middleware. If you're looking for a bus package (or just want to see how it's done), you can use [mediagone/cqrs-bus](https://github.com/Mediagone/cqrs-bus) which proposes a `SpecificationQuery` base class and the ` SpecificationQueryFetcher` middleware.
 
 
 ## License
