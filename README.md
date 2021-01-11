@@ -106,8 +106,8 @@ final class SelectArticleEntity implements Specification
 ```
 Let's register it in our specification collection:
 ```php
+...
 use App\Blog\Query\Article\Specifications\SelectArticleEntity; // Previously chosen namespace
-use Mediagone\Doctrine\Specifications\SpecificationCollection;
 use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
 
 final class ManyArticle extends SpecificationCollection
