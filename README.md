@@ -71,6 +71,9 @@ Each method splits the query into separate specifications:
 First, we need to create our main class that will be updated later in our example. It extends `SpecificationCollection` which provides a simple specification registration mechanism, we'll see that in details right after.
 
 ```php
+namespace App\Blog\Query\Article; // Example namespace, choose what fits best to your project
+use Mediagone\Doctrine\Specifications\SpecificationCollection;
+
 final class ManyArticle extends SpecificationCollection
 {
     
@@ -81,6 +84,12 @@ final class ManyArticle extends SpecificationCollection
 ### SelectArticleEntity specification
 Our first specification defines the selected entity in our query builder:
 ```php
+namespace App\Blog\Query\Article\Specifications; // Example namespace, choose what fits best to your project
+use App\Blog\Article; // Assumed FQCN of your entity
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
+use Mediagone\Doctrine\Specifications\Specification;
+
 final class SelectArticleEntity implements Specification
 {
     public function modifyBuilder(QueryBuilder $builder) : void
@@ -97,6 +106,10 @@ final class SelectArticleEntity implements Specification
 ```
 Let's register it in our specification collection:
 ```php
+use App\Blog\Query\Article\Specifications\SelectArticleEntity; // Previously chosen specification's namespace
+use Mediagone\Doctrine\Specifications\SpecificationCollection;
+use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
+
 final class ManyArticle extends SpecificationCollection
 {
     public static function asEntity() : self
@@ -215,8 +228,11 @@ final class ManyArticle extends SpecificationCollection
 
 Finally, we can easily retrieve results according to our specification collection:
 ```php
-$repository = new DoctrineSpecificationRepository($doctrineEntityManager);
+use Mediagone\Doctrine\Specifications\SpecificationRepository;
 
+...
+
+$repository = new SpecificationRepository($doctrineEntityManager);
 $articles = $repository->find(
     ManyArticle::asEntity()
     ->postedBy($user)
