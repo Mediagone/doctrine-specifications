@@ -27,5 +27,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0"
+    },
+    "scripts": {
+        "tests": "phpunit -c phpunit.xml.dist --testsuite Unit_Tests"
     }
 }
