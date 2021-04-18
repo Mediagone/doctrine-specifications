@@ -3,6 +3,7 @@
 namespace Mediagone\Doctrine\Specifications;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use LogicException;
 use function array_shift;
 
@@ -13,7 +14,7 @@ final class SpecificationRepository
     // Properties
     //========================================================================================================
     
-    protected EntityManagerInterface $em;
+    private ManagerRegistry $registry;
     
     
     
@@ -21,9 +22,9 @@ final class SpecificationRepository
     // Constructor
     //========================================================================================================
     
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->em = $em;
+        $this->registry = $registry;
     }
     
     
@@ -34,7 +35,7 @@ final class SpecificationRepository
     
     public function find(SpecificationCollection $collection)
     {
-        $builder = $this->em->createQueryBuilder();
+        $builder = $this->getEntityManagerFor($collection)->createQueryBuilder();
         
         foreach ($collection->getSpecifications() as $spec) {
             $spec->modifyBuilder($builder);
@@ -45,7 +46,7 @@ final class SpecificationRepository
         foreach ($collection->getSpecifications() as $spec) {
             $spec->modifyQuery($q);
         }
-    
+        
         if ($collection->getRepositoryResult() === SpecificationRepositoryResult::MANY_OBJECTS) {
             return $q->getResult();
         }
@@ -58,6 +59,17 @@ final class SpecificationRepository
         }
         
         throw new LogicException('Unsupported SpecificationRepositoryResult ('.$collection->getRepositoryResult().')');
+    }
+    
+    
+    
+    //========================================================================================================
+    // Helpers
+    //========================================================================================================
+    
+    public function getEntityManagerFor(SpecificationCollection $collection) : EntityManagerInterface
+    {
+        return $this->registry->getManagerForClass($collection::entityFqcn());
     }
     
     

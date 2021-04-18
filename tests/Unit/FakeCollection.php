@@ -10,6 +10,11 @@ use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
 final class FakeCollection extends SpecificationCollection
 {
     
+    public static function entityFqcn() : string
+    {
+        return '';
+    }
+    
     public static function create(Specification $specification)
     {
         return new self($specification, SpecificationRepositoryResult::MANY_OBJECTS);

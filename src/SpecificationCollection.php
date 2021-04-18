@@ -64,6 +64,9 @@ abstract class SpecificationCollection
     // Methods
     //========================================================================================================
     
+    abstract public static function entityFqcn() : string;
+    
+    
     final public function dumpDQL() : self
     {
         $this->addSpecification(DebugDumpDQL::specification());
