@@ -8,6 +8,9 @@ use Mediagone\Doctrine\Specifications\Universal\LimitResultsOffset;
 use PHPUnit\Framework\TestCase;
 
 
+/**
+ * @covers \Mediagone\Doctrine\Specifications\Universal\LimitResultsOffset
+ */
 final class LimitResultsOffsetTest extends TestCase
 {
     public function test_implements_specification_interface(): void

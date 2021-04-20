@@ -7,6 +7,9 @@ use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
 use PHPUnit\Framework\TestCase;
 
 
+/**
+ * @covers \Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL
+ */
 final class DebugDumpSQLTest extends TestCase
 {
     public function test_implements_specification_interface(): void

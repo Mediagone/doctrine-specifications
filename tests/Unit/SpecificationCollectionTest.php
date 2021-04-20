@@ -9,6 +9,9 @@ use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
 use PHPUnit\Framework\TestCase;
 
 
+/**
+ * @covers \Mediagone\Doctrine\Specifications\SpecificationCollection
+ */
 final class SpecificationCollectionTest extends TestCase
 {
     public function test_can_use_many_objects_result(): void

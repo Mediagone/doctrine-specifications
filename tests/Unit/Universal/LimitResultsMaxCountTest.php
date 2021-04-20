@@ -8,6 +8,9 @@ use Mediagone\Doctrine\Specifications\Universal\LimitResultsMaxCount;
 use PHPUnit\Framework\TestCase;
 
 
+/**
+ * @covers \Mediagone\Doctrine\Specifications\Universal\LimitResultsMaxCount
+ */
 final class LimitResultsMaxCountTest extends TestCase
 {
     public function test_implements_specification_interface(): void

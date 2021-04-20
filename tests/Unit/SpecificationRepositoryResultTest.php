@@ -6,6 +6,9 @@ use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
 use PHPUnit\Framework\TestCase;
 
 
+/**
+ * @covers \Mediagone\Doctrine\Specifications\SpecificationRepository
+ */
 final class SpecificationRepositoryResultTest extends TestCase
 {
     public function test_many_objects_value_is_valid(): void

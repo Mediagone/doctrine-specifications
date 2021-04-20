@@ -7,6 +7,9 @@ use Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL;
 use PHPUnit\Framework\TestCase;
 
 
+/**
+ * @covers \Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL
+ */
 final class DebugDumpDQLTest extends TestCase
 {
     public function test_implements_specification_interface(): void
