@@ -2,6 +2,8 @@
 
 namespace Mediagone\Doctrine\Specifications;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
 use Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL;
 use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
@@ -64,7 +66,10 @@ abstract class SpecificationCollection
     // Methods
     //========================================================================================================
     
-    abstract public static function entityFqcn() : string;
+    public function getEntityManager(ManagerRegistry $registry) : EntityManager
+    {
+        return $registry->getManager();
+    }
     
     
     final public function dumpDQL() : self
