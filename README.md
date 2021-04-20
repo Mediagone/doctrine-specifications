@@ -273,26 +273,12 @@ final class ManyArticle extends SpecificationCollection
     }
 }
 ```
-Exemple of usage for pagination:
+Exemple of usage:
 ```php
-$pageNumber = 2;
-$articlesPerPage = 10;
-
 $totalArticleCount = $repository->find(
-    ManyArticle::asCount()
+    ManyArticle::asCount() // retrieve the count instead of entities
     ->postedBy($user)
     ->inCategory($category)
-);
-
-$articles = $repository->find(
-    ManyArticle::asEntity()
-    // Same specifications as previous query
-    ->postedBy($user)
-    ->inCategory($category)
-
-    // Additional specifications for pagination
-    ->maxResult($articlesPerPage)
-    ->resultOffset(($pageNumber - 1) * $articlesPerPage)
 );
 ```
 
@@ -300,9 +286,12 @@ _Note:_
 
 - You'll probably want to create a separate collection for querying single article (eg. `OneArticle`) since specification filters are usually not the same for single or array results. Shared filters can be easily added to both collections.
 
+
 ### Debugging
 
 The `SpecificationCollection` class comes with built-in methods that adds debug oriented specifications to the collection.
+- DebugDumpDQL
+- DebugDumpSQL
 
 So you can easily dump the generated DQL and SQL by adding some method calls:
 
@@ -314,6 +303,32 @@ $articles = $repository->find(
     
     ->dumpDQL() //  <--- equivalent of   dump($query->getDQL());
     ->dumpSQL() //  <--- equivalent of   dump($query->getSQL());
+);
+```
+
+### Generic specifications
+
+The library comes with some other built-in generic specifications:
+- LimitResultsMaxCount
+- LimitResultsOffset
+- LimitResultsPaginate
+
+Exemple of usage for pagination:
+```php
+$pageNumber = 2;
+$articlesPerPage = 10;
+
+$articles = $repository->find(
+    ManyArticle::asEntity()
+    ->postedBy($user)
+    ->inCategory($category)
+
+    // Add results specifications separately (LimitResultsMaxCount and LimitResultsOffset)
+    ->maxResult($articlesPerPage)
+    ->resultOffset(($pageNumber - 1) * $articlesPerPage)
+    
+    // Or use the pagination specification (LimitResultsPaginate)
+    ->paginate($pageNumber, $articlesPerPage)
 );
 ```
 
