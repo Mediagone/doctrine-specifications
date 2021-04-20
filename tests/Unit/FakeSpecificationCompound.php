@@ -3,18 +3,12 @@
 namespace Tests\Mediagone\Doctrine\Specifications;
 
 use Mediagone\Doctrine\Specifications\Specification;
-use Mediagone\Doctrine\Specifications\SpecificationCollection;
+use Mediagone\Doctrine\Specifications\SpecificationCompound;
 use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
 
 
-final class FakeCollection extends SpecificationCollection
+final class FakeSpecificationCompound extends SpecificationCompound
 {
-    
-    public static function entityFqcn() : string
-    {
-        return '';
-    }
-    
     public static function create(Specification $specification)
     {
         return new self($specification, SpecificationRepositoryResult::MANY_OBJECTS);

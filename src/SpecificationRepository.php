@@ -32,33 +32,33 @@ final class SpecificationRepository
     // Methods
     //========================================================================================================
     
-    public function find(SpecificationCollection $collection)
+    public function find(SpecificationCompound $compound)
     {
-        $entityManager = $collection->getEntityManager($this->registry);
+        $entityManager = $compound->getEntityManager($this->registry);
         $queryBuilder = $entityManager->createQueryBuilder();
         
-        foreach ($collection->getSpecifications() as $spec) {
+        foreach ($compound->getSpecifications() as $spec) {
             $spec->modifyBuilder($queryBuilder);
         }
         
         $query = $queryBuilder->getQuery();
         
-        foreach ($collection->getSpecifications() as $spec) {
+        foreach ($compound->getSpecifications() as $spec) {
             $spec->modifyQuery($query);
         }
         
-        if ($collection->getRepositoryResult() === SpecificationRepositoryResult::MANY_OBJECTS) {
+        if ($compound->getRepositoryResult() === SpecificationRepositoryResult::MANY_OBJECTS) {
             return $query->getResult();
         }
-        if ($collection->getRepositoryResult() === SpecificationRepositoryResult::SINGLE_OBJECT) {
+        if ($compound->getRepositoryResult() === SpecificationRepositoryResult::SINGLE_OBJECT) {
             return $query->getOneOrNullResult();
         }
-        if ($collection->getRepositoryResult() === SpecificationRepositoryResult::SINGLE_SCALAR) {
+        if ($compound->getRepositoryResult() === SpecificationRepositoryResult::SINGLE_SCALAR) {
             // TODO: patch until https://github.com/doctrine/orm/pull/8340 is fixed
             return (int)array_shift($query->getScalarResult()[0]);
         }
         
-        throw new LogicException('Unsupported SpecificationRepositoryResult ('.$collection->getRepositoryResult().')');
+        throw new LogicException('Unsupported SpecificationRepositoryResult ('.$compound->getRepositoryResult().')');
     }
     
     

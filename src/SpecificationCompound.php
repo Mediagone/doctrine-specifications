@@ -10,7 +10,7 @@ use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
 use function in_array;
 
 
-abstract class SpecificationCollection
+abstract class SpecificationCompound
 {
     //========================================================================================================
     // Properties

@@ -67,14 +67,14 @@ Each method splits the query into separate specifications:
 - orderedAlphabetically => `OrderArticleAlphabetically` specification
 - maxCount => `LimitMaxCount` specification
 
-### SpecificationCollection class
-First, we need to create our main class that will be updated later in our example. It extends `SpecificationCollection` which provides a simple specification registration mechanism, we'll see that in details right after.
+### SpecificationCompound class
+First, we need to create our main class that will be updated later in our example. It extends `SpecificationCompound` which provides a simple specification registration mechanism, we'll see that in details right after.
 
 ```php
 namespace App\Blog\Query\Article; // Example namespace, choose what fits best to your project
-use Mediagone\Doctrine\Specifications\SpecificationCollection;
+use Mediagone\Doctrine\Specifications\SpecificationCompound;
 
-final class ManyArticle extends SpecificationCollection
+final class ManyArticle extends SpecificationCompound
 {
     
 }
@@ -98,13 +98,13 @@ final class SelectArticleEntity extends Specification
     }
 }
 ```
-Let's register it in our specification collection:
+Let's register it in our specification compound:
 ```php
 ...
 use App\Blog\Query\Article\Specifications\SelectArticleEntity; // Previously chosen namespace
 use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
 
-final class ManyArticle extends SpecificationCollection
+final class ManyArticle extends SpecificationCompound
 {
     public static function asEntity() : self
     {
@@ -113,8 +113,8 @@ final class ManyArticle extends SpecificationCollection
 }
 ```
 _Notes:_ 
-- Each SpecificationCollection must be initialized with an _initial specification_ and a _repository result format_, both being closely related.
-- The SpecificationCollection's constructor is protected to enforce the usage of [static factory methods](https://medium.com/javarevisited/static-factory-methods-an-alternative-to-public-constructors-73cbe8b9fda), because descriptive naming is more meaningful about what the specifications will return.
+- Each SpecificationCompound must be initialized with an _initial specification_ and a _repository result format_, both being closely related.
+- The SpecificationCompound's constructor is protected to enforce the usage of [static factory methods](https://medium.com/javarevisited/static-factory-methods-an-alternative-to-public-constructors-73cbe8b9fda), because descriptive naming is more meaningful about what the specifications will return.
 
 
 
@@ -137,9 +137,9 @@ final class FilterArticlePostedBy extends Specification
     }
 }
 ```
-Again, add it in the collection but this time using a fluent instance method:
+Again, add it in the compound but this time using a fluent instance method:
 ```php
-final class ManyArticle extends SpecificationCollection
+final class ManyArticle extends SpecificationCompound
 {
     // ...
     
@@ -186,9 +186,9 @@ final class LimitMaxCount extends Specification
     }
 }
 ```
-Don't forget to register them in the collection:
+Don't forget to register them in the compound:
 ```php
-final class ManyArticle extends SpecificationCollection
+final class ManyArticle extends SpecificationCompound
 {
     // ...
     
@@ -209,7 +209,7 @@ final class ManyArticle extends SpecificationCollection
 
 ### Execute the query
 
-Finally, we can easily retrieve results according to our specification collection, by using the `SpecificationRepository` class (which fully replaces traditional Doctrine repositories):
+Finally, we can easily retrieve results according to our specification compound, by using the `SpecificationRepository` class (which fully replaces traditional Doctrine repositories):
 ```php
 use Mediagone\Doctrine\Specifications\SpecificationRepository;
 
@@ -240,9 +240,9 @@ The package allows results to get retrieved in different formats:
 - SINGLE_OBJECT : returns a **single hydrated object** or **null** (similar to `getOneOrNullResult()`)
 - SINGLE_SCALAR : returns a **single scalar** (similar to `getSingleScalarResult()`)
 
-Thereby, you can use the same specifications for different result types (count, DTOs...) by adding multiple _static factory methods_ in a collection.
+Thereby, you can use the same specifications for different result types (count, DTOs...) by adding multiple _static factory methods_ in a compound.
 ```php
-final class ManyArticle extends SpecificationCollection
+final class ManyArticle extends SpecificationCompound
 {
     public static function asEntity() : self
     {
@@ -266,12 +266,12 @@ $totalArticleCount = $repository->find(
 
 _Note:_
 
-- You'll probably want to create a separate collection for querying single article (eg. `OneArticle`) since specification filters are usually not the same for single or array results. Shared filters can be easily added to both collections.
+- You'll probably want to create a separate specification compound for querying single article (eg. `OneArticle`) since specification filters are usually not the same for single or array results. Shared filters can be easily added to both compounds.
 
 
 ### Debugging
 
-The `SpecificationCollection` class comes with built-in methods that adds debug oriented specifications to the collection.
+The `SpecificationCompound` class comes with built-in methods that adds debug oriented specifications to the compound.
 - DebugDumpDQL
 - DebugDumpSQL
 
@@ -318,7 +318,7 @@ $articles = $repository->find(
 
 Specification queries are best used through a _Query bus_, that suits very well with DDD, however it's not a hard requirement. You can easily tweak your own adapter for any bus or another kind of service.
 
-Your query classes might extend `SpecificationCollection`, making them automatically handleable by a dedicated bus middleware.
+Your query classes might extend `SpecificationCompound`, making them automatically handleable by a dedicated bus middleware.
 
 If you're looking for a bus package (or just want to see how it's done), you can use [mediagone/cqrs-bus](https://github.com/Mediagone/cqrs-bus) which proposes a `SpecificationQuery` base class and the ` SpecificationQueryFetcher` middleware.
 
