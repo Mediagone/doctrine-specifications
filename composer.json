@@ -2,7 +2,7 @@
     "name": "mediagone/doctrine-specifications",
     "type": "library",
     "description": "Doctrine implementation of repository Specifications pattern",
-    "keywords": ["doctrine", "repository", "specifications", "orm", "database"],
+    "keywords": ["doctrine", "repository", "specifications", "orm", "database", "criteria"],
     "license": "MIT",
     "authors": [
         {"name": "Bruce Suire", "role": "Developer"}
