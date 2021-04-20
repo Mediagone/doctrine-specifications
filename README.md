@@ -39,10 +39,10 @@ Using _[Query Functions](https://ocramius.github.io/doctrine-best-practices/#/90
 
 The _[Specifications pattern](https://en.wikipedia.org/wiki/Specification_pattern)_ comes to the rescue helping you to split them into explicit and reusable filters, improving useability and testability of your database queries. This package is a customized flavor of this pattern, inspired by Benjamin Eberlei's [article](https://beberlei.de/2013/03/04/doctrine_repositories.html). It revolves around a simple concept: specifications. Each specification defines a set of criteria that will be automatically applied to Doctrine's QueryBuilder and Query objects.
 ```php
-interface Specification
+abstract class Specification
 {
-    public function modifyBuilder(QueryBuilder $builder) : void;
-    public function modifyQuery(Query $query) : void;
+    public function modifyBuilder(QueryBuilder $builder) : void { }
+    public function modifyQuery(Query $query) : void { }
 }
 ```
 
@@ -82,25 +82,19 @@ final class ManyArticle extends SpecificationCollection
 
 
 ### SelectArticleEntity specification
-Our first specification defines the selected entity in our query builder:
+Our first specification defines the selected entity in our query builder by overloading the `modifyBuilder` method:
 ```php
 namespace App\Blog\Query\Article\Specifications; // Example namespace
 use App\Blog\Article; // Assumed FQCN of your entity
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Mediagone\Doctrine\Specifications\Specification;
 
-final class SelectArticleEntity implements Specification
+final class SelectArticleEntity extends Specification
 {
     public function modifyBuilder(QueryBuilder $builder) : void
     {
         $builder->from(Article::class, 'article');
         $builder->select('article');
-    }
-    
-    public function modifyQuery(Query $query) : void
-    {
-        // Do nothing
     }
 }
 ```
@@ -127,7 +121,7 @@ _Notes:_
 ### Filtering specifications
 Our second specification will filter articles by author:
 ```php
-final class FilterArticlePostedBy implements Specification
+final class FilterArticlePostedBy extends Specification
 {
     private User $user;
 
@@ -140,11 +134,6 @@ final class FilterArticlePostedBy implements Specification
     {
         $builder->addWhere('article.authorId = :userId');
         $builder->setParameter('userId', $this->user->getId());
-    }
-    
-    public function modifyQuery(Query $query) : void
-    {
-        // Do nothing
     }
 }
 ```
@@ -162,24 +151,23 @@ final class ManyArticle extends SpecificationCollection
 }
 ```
 
-Now we can do exactly the same for our two last filters: `orderedAlphabetically` and `maxCount`. Notice that we can also modify the Doctrine query as well:
+Now we can do exactly the same for our two last filters: `orderedAlphabetically` and `maxCount`.
 
 ```php
-final class OrderArticleAlphabetically implements Specification
+final class OrderArticleAlphabetically extends Specification
 {
     public function modifyBuilder(QueryBuilder $builder) : void
     {
         $builder->addOrderBy('article.title', 'ASC');
     }
-    
-    public function modifyQuery(Query $query) : void
-    {
-        // Do nothing
-    }
 }
 ```
+
+Notice that we can also modify the Doctrine query as well through `modifyQuery`:
 ```php
-final class LimitMaxCount implements Specification
+use Doctrine\ORM\Query;
+
+final class LimitMaxCount extends Specification
 {
     private int $count;
 
@@ -190,11 +178,6 @@ final class LimitMaxCount implements Specification
         }
         
         $this->count = $count;
-    }
-
-    public function modifyBuilder(QueryBuilder $builder) : void
-    {
-        // Do nothing
     }
     
     public function modifyQuery(Query $query) : void
@@ -230,9 +213,8 @@ Finally, we can easily retrieve results according to our specification collectio
 ```php
 use Mediagone\Doctrine\Specifications\SpecificationRepository;
 
-...
-
 $repository = new SpecificationRepository($doctrineEntityManager);
+
 $articles = $repository->find(
     ManyArticle::asEntity()
     ->postedBy($user)

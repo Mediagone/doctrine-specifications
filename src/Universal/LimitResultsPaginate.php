@@ -3,12 +3,11 @@
 namespace Mediagone\Doctrine\Specifications\Universal;
 
 use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class LimitResultsPaginate implements Specification
+final class LimitResultsPaginate extends Specification
 {
     //========================================================================================================
     // Properties
@@ -49,12 +48,6 @@ final class LimitResultsPaginate implements Specification
     //========================================================================================================
     // Methods
     //========================================================================================================
-    
-    public function modifyBuilder(QueryBuilder $builder) : void
-    {
-        // Do nothing
-    }
-    
     
     public function modifyQuery(Query $query) : void
     {

@@ -6,8 +6,15 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 
 
-interface Specification
+abstract class Specification
 {
-    public function modifyBuilder(QueryBuilder $builder) : void;
-    public function modifyQuery(Query $query) : void;
+    public function modifyBuilder(QueryBuilder $builder) : void
+    {
+        
+    }
+    
+    public function modifyQuery(Query $query) : void
+    {
+    
+    }
 }

@@ -2,12 +2,11 @@
 
 namespace Mediagone\Doctrine\Specifications\Universal;
 
-use Mediagone\Doctrine\Specifications\Specification;
 use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
+use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class DebugDumpSQL implements Specification
+final class DebugDumpSQL extends Specification
 {
     //========================================================================================================
     // Constructors
@@ -29,12 +28,6 @@ final class DebugDumpSQL implements Specification
     //========================================================================================================
     // Methods
     //========================================================================================================
-    
-    public function modifyBuilder(QueryBuilder $builder) : void
-    {
-        // Do nothing
-    }
-    
     
     public function modifyQuery(Query $query) : void
     {
