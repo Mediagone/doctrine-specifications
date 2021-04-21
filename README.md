@@ -314,6 +314,15 @@ $articles = $repository->find(
 );
 ```
 
+
+### Naming specifications
+There is no hard requirement about naming, but you should use defined prefixes to differentiate between your specifications:
+- *Filter...* : specifications that filter out results, but allowing _**multiple results**_.
+- *Get...* : specifications that filter out results, in order to get _**a unique (or null) result**_.
+- *Order...* : specifications that change the results order.
+- *Select...* : specifications that define selected result data (entities, DTO, joins, groupBy...)
+...
+
 ### Using multiple Entity Managers
 By default, the *default* entity manager is used, but you can specify for each Compound which entity manager to use by overloading the `getEntityManager` method:
 ```php
