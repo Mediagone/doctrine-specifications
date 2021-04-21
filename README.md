@@ -264,11 +264,6 @@ $totalArticleCount = $repository->find(
 );
 ```
 
-_Note:_
-
-- You'll probably want to create a separate specification compound for querying single article (eg. `OneArticle`) since specification filters are usually not the same for single or array results. Shared filters can be easily added to both compounds.
-
-
 ### Debugging
 
 The `SpecificationCompound` class comes with built-in methods that adds debug oriented specifications to the compound.
@@ -322,6 +317,29 @@ There is no hard requirement about naming, but you should use defined prefixes t
 - *Order...* : specifications that change the results order.
 - *Select...* : specifications that define selected result data (entities, DTO, joins, groupBy...)
 ...
+
+### Organizing specifications
+You'll probably want to create a separate compound for querying single article (eg. `OneArticle`) since the specification filters are usually not the same for single or array results (shared specifications can be easily added to both compounds).
+
+Hence a suggested file structure might be:
+```
+Article
+  ├─ Query
+  │   ├─ Specifications
+  │   │   ├─ FilterArticlePostedBy.php
+  │   │   ├─ GetArticleById.php
+  │   │   ├─ OrderArticleAlphabetically.php
+  │   │   ├─ SelectArticleCount.php
+  │   │   ├─ SelectArticleDTO.php
+  │   │   └─ SelectArticleEntity.php
+  │   │
+  │   ├─ ManyArticle.php
+  │   └─ OneArticle.php
+  │
+  ├─ Article.php
+  └─ ArticleDTO.php
+```
+
 
 ### Using multiple Entity Managers
 By default, the *default* entity manager is used, but you can specify for each Compound which entity manager to use by overloading the `getEntityManager` method:
