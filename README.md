@@ -314,6 +314,27 @@ $articles = $repository->find(
 );
 ```
 
+### Using multiple Entity Managers
+By default, the *default* entity manager is used, but you can specify for each Compound which entity manager to use by overloading the `getEntityManager` method:
+```php
+final class ManyArticle extends SpecificationCompound
+{
+    public function getEntityManager(ManagerRegistry $registry) : EntityManager
+    {
+        return $registry->getManagerForClass(Article::class);
+    }
+    
+}
+```
+You can also get it by the name used in the ORM configuration:
+```php
+public function getEntityManager(ManagerRegistry $registry) : EntityManager
+{
+    return $registry->getManager('secondary');
+}
+```
+
+
 ### Command bus
 
 Specification queries are best used through a _Query bus_, that suits very well with DDD, however it's not a hard requirement. You can easily tweak your own adapter for any bus or another kind of service.
