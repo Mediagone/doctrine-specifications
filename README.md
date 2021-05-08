@@ -276,6 +276,8 @@ To remove the hassle of creating custom specifications for most common usages, t
 |WhereFieldGreaterThanOrEqual|`field >= value`|
 |WhereFieldLesserThan|`field < value`|
 |WhereFieldLesserThanOrEqual|`field <= value`|
+|WhereFieldIn|`field IN (value)`|
+|WhereFieldInArray|`field IN (values,generated,list)`|
 
 ```php
 namespace Mediagone\Doctrine\Specifications\Universal\WhereFieldEqualTo;
