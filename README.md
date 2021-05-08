@@ -67,6 +67,8 @@ Each method splits the query into separate specifications:
 - orderedAlphabetically => `OrderArticleAlphabetically` specification
 - maxCount => `LimitMaxCount` specification
 
+> _Note: we'll see how to create each of these specifications for educational purposes, but the library provides many generic specifications you can use for common usages (see the `Generic specifications` section below)._ 
+
 ### SpecificationCompound class
 First, we need to create our main class that will be updated later in our example. It extends `SpecificationCompound` which provides a simple specification registration mechanism, we'll see that in details right after.
 
