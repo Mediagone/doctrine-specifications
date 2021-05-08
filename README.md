@@ -230,9 +230,6 @@ _Notes:_
 
 ## Extended usage
 
-Naming convention used in this exemple is only a suggestion, feel free to adapt to your needs or preferences.
-
-
 ### Return types
 
 The package allows results to get retrieved in different formats:
@@ -264,33 +261,47 @@ $totalArticleCount = $repository->find(
 );
 ```
 
-### Debugging
-
-The `SpecificationCompound` class comes with built-in methods that adds debug oriented specifications to the compound.
-- DebugDumpDQL
-- DebugDumpSQL
-
-So you can easily dump the generated DQL and SQL by adding some method calls:
-
-```php
-$articles = $repository->find(
-    ManyArticle::asEntity()
-    ->published()
-    ->postedBy($user)
-    
-    ->dumpDQL() //  <--- equivalent of   dump($query->getDQL());
-    ->dumpSQL() //  <--- equivalent of   dump($query->getSQL());
-);
-```
 
 ### Generic specifications
 
-The library comes with some other built-in generic specifications:
-- LimitResultsMaxCount
-- LimitResultsOffset
-- LimitResultsPaginate
+To remove the hassle of creating custom specifications for most common usages, the library comes with built-in generic specifications you can use in your compounds:
 
-Exemple of usage for pagination:
+|Specification name|QueryBuilder condition|
+|---|:---:|
+|WhereFieldDifferentFrom|`field != value`|
+|WhereFieldEqualTo|`field = value`|
+|WhereFieldGreaterThan|`field > value`|
+|WhereFieldGreaterThanOrEqual|`field >= value`|
+|WhereFieldLesserThan|`field < value`|
+|WhereFieldLesserThanOrEqual|`field <= value`|
+
+```php
+namespace Mediagone\Doctrine\Specifications\Universal\WhereFieldEqualTo;
+
+
+final class ManyArticle extends SpecificationCompound
+{
+    // ...
+    
+    public function postedByUser(UserId $userId) : self
+    {
+        $this->addSpecification(WhereFieldEqualTo::specification('article.authorId', 'authorId',  $userId, 'app_userid'));
+        
+        return $this;
+    }
+}
+```
+
+
+There are also some other specifications for pagination:
+
+|Specification name|Note|
+|---|:---|
+|LimitResultsMaxCount|_Defines the (max) number of returned results._|
+|LimitResultsOffset|_Defines how many results to skip._|
+|LimitResultsPaginate|_Combines_ MaxCount _and_ Offset _effects, with different parameters._|
+
+Exemple of usage:
 ```php
 $pageNumber = 2;
 $articlesPerPage = 10;
@@ -310,7 +321,37 @@ $articles = $repository->find(
 ```
 
 
+
+### Debugging
+
+The `SpecificationCompound` class comes with built-in methods that adds debug oriented specifications to all compound classes, _you don't have to include them in your own compounds_:
+
+
+|Specification name|
+|---|
+|DebugDumpDQL|
+|DebugDumpSQL|
+
+
+So you can easily dump the generated DQL and SQL with few method calls:
+
+```php
+$articles = $repository->find(
+    ManyArticle::asEntity()
+    ->published()
+    ->postedByUser($userId)
+    
+    ->dumpDQL() //  <--- equivalent of   dump($query->getDQL());
+    ->dumpSQL() //  <--- equivalent of   dump($query->getSQL());
+);
+```
+
+
+
 ### Naming specifications
+
+Naming convention used in this exemple is only a suggestion, feel free to adapt to your needs or preferences.
+
 There is no hard requirement about naming, but you should use defined prefixes to differentiate between your specifications:
 - *Filter...* : specifications that filter out results, but allowing _**multiple results**_.
 - *Get...* : specifications that filter out results, in order to get _**a unique (or null) result**_.
