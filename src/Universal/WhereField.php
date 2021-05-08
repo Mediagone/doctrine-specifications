@@ -16,6 +16,8 @@ abstract class WhereField extends Specification
     
     private string $paramName;
     
+    private string $paramType;
+    
     private string $operator;
     
     /**
@@ -23,21 +25,19 @@ abstract class WhereField extends Specification
      */
     private $value;
     
-    private string $type;
-    
     
     
     //========================================================================================================
     // Constructors
     //========================================================================================================
     
-    protected function __construct(string $aliasedField, string $paramName, string $operator, $value, string $type)
+    protected function __construct(string $aliasedField, string $paramName, string $operator, $value, string $paramType)
     {
         $this->aliasedField = $aliasedField;
         $this->paramName = $paramName;
+        $this->paramType = $paramType;
         $this->operator = $operator;
         $this->value = $value;
-        $this->type = $type;
     }
     
     
@@ -50,7 +50,7 @@ abstract class WhereField extends Specification
     {
         $builder
             ->andWhere("$this->aliasedField $this->operator :$this->paramName")
-            ->setParameter($this->paramName, $this->value, $this->type)
+            ->setParameter($this->paramName, $this->value, $this->paramType)
         ;
     }
     

@@ -6,9 +6,9 @@ namespace Mediagone\Doctrine\Specifications\Universal;
 final class WhereFieldGreaterThan extends WhereField
 {
     
-    public static function specification(string $aliasedField, string $paramName, $value, string $type) : self
+    public static function specification(string $aliasedField, string $paramName, $value, string $paramType) : self
     {
-        return new self($aliasedField, $paramName, '>', $value, $type);
+        return new self($aliasedField, $paramName, '>', $value, $paramType);
     }
     
 }
