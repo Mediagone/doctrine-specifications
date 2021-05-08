@@ -270,17 +270,17 @@ To remove the hassle of creating custom specifications for most common usages, t
 
 |Specification name|QueryBuilder condition|
 |---|:---:|
-|WhereFieldBetween|`field >= min AND field <= max`|
-|WhereFieldBetweenExclusive|`field > min AND field < max`|
 |WhereFieldDifferentFrom|`field != value`|
 |WhereFieldEqualTo|`field = value`|
 |WhereFieldGreaterThan|`field > value`|
 |WhereFieldGreaterThanOrEqual|`field >= value`|
 |WhereFieldLesserThan|`field < value`|
 |WhereFieldLesserThanOrEqual|`field <= value`|
-|WhereFieldLike|`field LIKE 'value'`|
 |WhereFieldIn|`field IN (value)`|
 |WhereFieldInArray|`field IN (values,generated,list)`|
+|WhereFieldLike|`field LIKE 'value'`|
+|WhereFieldBetween|`field >= min AND field <= max`|
+|WhereFieldBetweenExclusive|`field > min AND field < max`|
 
 ```php
 namespace Mediagone\Doctrine\Specifications\Universal\WhereFieldEqualTo;
