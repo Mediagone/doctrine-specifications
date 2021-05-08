@@ -268,6 +268,8 @@ To remove the hassle of creating custom specifications for most common usages, t
 
 |Specification name|QueryBuilder condition|
 |---|:---:|
+|WhereFieldBetween|`field >= min AND field <= max`|
+|WhereFieldBetweenExclusive|`field > min AND field < max`|
 |WhereFieldDifferentFrom|`field != value`|
 |WhereFieldEqualTo|`field = value`|
 |WhereFieldGreaterThan|`field > value`|
