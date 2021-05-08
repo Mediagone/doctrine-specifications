@@ -13,7 +13,7 @@ But what if your queries were looking like this?
 $articles = $repository->find(
     ManyArticle::asEntity()
     ->published()
-    ->postedBy($user)
+    ->postedByUser($userId)
     ->withCategories($categories)
     ->orderedAlphabetically()
     ->paginate($pageNumber, $itemsPerPage)
@@ -55,7 +55,7 @@ We'll learn together how to create the following query:
 ```php
 $articles = $repository->find(
     ManyArticle::asEntity()
-    ->postedBy($user)
+    ->postedByUser($userId)
     ->orderedAlphabetically()
     ->maxCount(5)
 );
@@ -63,7 +63,7 @@ $articles = $repository->find(
 
 Each method splits the query into separate specifications:
 - asEntity => `SelectArticleEntity` specification
-- postedBy => `FilterArticlePostedBy` specification
+- postedByUser => `FilterArticlePostedBy` specification
 - orderedAlphabetically => `OrderArticleAlphabetically` specification
 - maxCount => `LimitMaxCount` specification
 
@@ -121,19 +121,19 @@ _Notes:_
 ### Filtering specifications
 Our second specification will filter articles by author:
 ```php
-final class FilterArticlePostedBy extends Specification
+final class FilterArticlePostedByUser extends Specification
 {
-    private User $user;
+    private UserId $userId;
 
-    public function __construct(User $user)
+    public function __construct(UserId $userId)
     {
-        $this->user = $user;
+        $this->userId = $userId;
     }
 
     public function modifyBuilder(QueryBuilder $builder) : void
     {
-        $builder->addWhere('article.authorId = :userId');
-        $builder->setParameter('userId', $this->user->getId());
+        $builder->addWhere('article.authorId = :authorId');
+        $builder->setParameter('authorId', $this->userId, 'app_userid');
     }
 }
 ```
@@ -143,9 +143,9 @@ final class ManyArticle extends SpecificationCompound
 {
     // ...
     
-    public function postedBy(User $user) : self
+    public function postedByUser(UserId $userId) : self
     {
-        $this->addSpecification(new FilterArticlePostedBy($user));
+        $this->addSpecification(new FilterArticlePostedByUser($userId));
         return $this;
     }
 }
@@ -217,7 +217,7 @@ $repository = new SpecificationRepository($doctrineEntityManager);
 
 $articles = $repository->find(
     ManyArticle::asEntity()
-    ->postedBy($user)
+    ->postedByUser($userId)
     ->orderedAlphabetically()
     ->maxCount(5)
 );
@@ -259,7 +259,7 @@ Exemple of usage:
 ```php
 $totalArticleCount = $repository->find(
     ManyArticle::asCount() // retrieve the count instead of entities
-    ->postedBy($user)
+    ->postedByUser($userId)
     ->inCategory($category)
 );
 ```
@@ -297,7 +297,7 @@ $articlesPerPage = 10;
 
 $articles = $repository->find(
     ManyArticle::asEntity()
-    ->postedBy($user)
+    ->postedByUser($userId)
     ->inCategory($category)
 
     // Add results specifications separately (LimitResultsMaxCount and LimitResultsOffset)
