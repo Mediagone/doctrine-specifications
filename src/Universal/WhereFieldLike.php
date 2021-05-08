@@ -6,7 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-abstract class WhereField extends Specification
+final class WhereFieldLike extends Specification
 {
     //========================================================================================================
     // Constructors
@@ -16,14 +16,7 @@ abstract class WhereField extends Specification
     
     private string $paramName;
     
-    private ?string $paramType;
-    
-    private string $operator;
-    
-    /**
-     * @var mixed $value
-     */
-    private $value;
+    private string $value;
     
     
     
@@ -31,13 +24,17 @@ abstract class WhereField extends Specification
     // Constructors
     //========================================================================================================
     
-    protected function __construct(string $aliasedField, string $paramName, string $operator, $value, ?string $paramType)
+    protected function __construct(string $aliasedField, string $paramName, string $value)
     {
         $this->aliasedField = $aliasedField;
         $this->paramName = $paramName;
-        $this->paramType = $paramType;
-        $this->operator = $operator;
         $this->value = $value;
+    }
+    
+    
+    public static function specification(string $aliasedField, string $paramName, string $value) : self
+    {
+        return new self($aliasedField, $paramName, $value);
     }
     
     
@@ -46,11 +43,11 @@ abstract class WhereField extends Specification
     // Methods
     //========================================================================================================
     
-    final public function modifyBuilder(QueryBuilder $builder) : void
+    public function modifyBuilder(QueryBuilder $builder) : void
     {
         $builder
-            ->andWhere("$this->aliasedField $this->operator :$this->paramName")
-            ->setParameter($this->paramName, $this->value, $this->paramType)
+            ->andWhere("$this->aliasedField LIKE :$this->paramName")
+            ->setParameter($this->paramName, $this->value)
         ;
     }
     

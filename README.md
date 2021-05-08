@@ -276,6 +276,7 @@ To remove the hassle of creating custom specifications for most common usages, t
 |WhereFieldGreaterThanOrEqual|`field >= value`|
 |WhereFieldLesserThan|`field < value`|
 |WhereFieldLesserThanOrEqual|`field <= value`|
+|WhereFieldLike|`field LIKE 'value'`|
 |WhereFieldIn|`field IN (value)`|
 |WhereFieldInArray|`field IN (values,generated,list)`|
 
