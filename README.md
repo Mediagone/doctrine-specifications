@@ -283,6 +283,9 @@ To remove the hassle of creating custom specifications for most common usages, t
 |WhereFieldLike|`field LIKE 'value'`|
 |WhereFieldBetween|`field >= min AND field <= max`|
 |WhereFieldBetweenExclusive|`field > min AND field < max`|
+|||
+|OrderResultsByAsc|`ORDER BY expression ASC`|
+|OrderResultsByDesc|`ORDER BY expression DESC`|
 
 ```php
 namespace Mediagone\Doctrine\Specifications\Universal\WhereFieldEqualTo;
