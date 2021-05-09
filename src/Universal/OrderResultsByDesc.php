@@ -39,7 +39,7 @@ final class OrderResultsByDesc extends Specification
     
     public function modifyBuilder(QueryBuilder $builder) : void
     {
-        $builder->addOrderBy("ORDER BY $this->expression", 'DESC');
+        $builder->addOrderBy($this->expression, 'DESC');
     }
     
     

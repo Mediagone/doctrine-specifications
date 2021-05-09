@@ -39,7 +39,7 @@ final class OrderResultsByAsc extends Specification
     
     public function modifyBuilder(QueryBuilder $builder) : void
     {
-        $builder->addOrderBy("ORDER BY $this->expression", 'ASC');
+        $builder->addOrderBy($this->expression, 'ASC');
     }
     
     
