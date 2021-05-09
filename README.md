@@ -278,6 +278,8 @@ To remove the hassle of creating custom specifications for most common usages, t
 |WhereFieldLesserThanOrEqual|`field <= value`|
 |WhereFieldIn|`field IN (value)`|
 |WhereFieldInArray|`field IN (values,generated,list)`|
+|WhereFieldIsNull|`field IS NULL`|
+|WhereFieldIsNotNull|`field IS NOT NULL`|
 |WhereFieldLike|`field LIKE 'value'`|
 |WhereFieldBetween|`field >= min AND field <= max`|
 |WhereFieldBetweenExclusive|`field > min AND field < max`|
