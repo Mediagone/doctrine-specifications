@@ -333,6 +333,13 @@ $articles = $repository->find(
 ```
 
 
+A last couple of specifications provide even more flexibility by allowing you to modify the QueryBuilder without having to create a separate class:
+
+|Specification name|
+|---|
+|CallbackBuilder|
+|CallbackQuery|
+
 
 ### Debugging
 
