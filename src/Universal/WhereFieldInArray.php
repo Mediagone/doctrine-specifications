@@ -18,7 +18,7 @@ final class WhereFieldInArray extends Specification
     
     private string $paramName;
     
-    private string $paramType;
+    private ?string $paramType;
     
     private array $values;
     
@@ -28,7 +28,7 @@ final class WhereFieldInArray extends Specification
     // Constructors
     //========================================================================================================
     
-    protected function __construct(string $aliasedField, string $paramName, array $values, string $paramType)
+    protected function __construct(string $aliasedField, string $paramName, array $values, ?string $paramType)
     {
         $this->aliasedField = $aliasedField;
         $this->paramName = $paramName;
@@ -37,7 +37,7 @@ final class WhereFieldInArray extends Specification
     }
     
     
-    public static function specification(string $aliasedField, string $paramName, array $values, string $paramType) : self
+    public static function specification(string $aliasedField, string $paramName, array $values, ?string $paramType = null) : self
     {
         return new self($aliasedField, $paramName, $values, $paramType);
     }

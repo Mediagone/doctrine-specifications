@@ -16,7 +16,7 @@ final class WhereFieldBetween extends Specification
     
     private string $paramName;
     
-    private string $paramType;
+    private ?string $paramType;
     
     /**
      * @var mixed $valueMin
@@ -34,7 +34,7 @@ final class WhereFieldBetween extends Specification
     // Constructors
     //========================================================================================================
     
-    protected function __construct(string $aliasedField, string $paramName, $valueMin, $valueMax, string $paramType)
+    protected function __construct(string $aliasedField, string $paramName, $valueMin, $valueMax, ?string $paramType)
     {
         $this->aliasedField = $aliasedField;
         $this->paramName = $paramName;
@@ -44,7 +44,7 @@ final class WhereFieldBetween extends Specification
     }
     
     
-    public static function specification(string $aliasedField, string $paramName, $valueMin, $valueMax, string $paramType) : self
+    public static function specification(string $aliasedField, string $paramName, $valueMin, $valueMax, ?string $paramType = null) : self
     {
         return new self($aliasedField, $paramName, $valueMin, $valueMax, $paramType);
     }
