@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class LimitResultsOffset extends Specification
+class LimitResultsOffset extends Specification
 {
     //========================================================================================================
     // Properties
@@ -42,7 +42,7 @@ final class LimitResultsOffset extends Specification
     // Methods
     //========================================================================================================
     
-    public function modifyQuery(Query $query) : void
+    final public function modifyQuery(Query $query) : void
     {
         if ($this->offset > 0) {
             $query->setFirstResult($this->offset);

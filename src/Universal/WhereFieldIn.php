@@ -6,7 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class WhereFieldIn extends Specification
+class WhereFieldIn extends Specification
 {
     //========================================================================================================
     // Constructors
@@ -40,7 +40,7 @@ final class WhereFieldIn extends Specification
     // Methods
     //========================================================================================================
     
-    public function modifyBuilder(QueryBuilder $builder) : void
+    final public function modifyBuilder(QueryBuilder $builder) : void
     {
         $builder->andWhere("$this->aliasedField IN ($this->value)");
     }

@@ -6,7 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class WhereFieldLike extends Specification
+class WhereFieldLike extends Specification
 {
     //========================================================================================================
     // Constructors
@@ -43,7 +43,7 @@ final class WhereFieldLike extends Specification
     // Methods
     //========================================================================================================
     
-    public function modifyBuilder(QueryBuilder $builder) : void
+    final public function modifyBuilder(QueryBuilder $builder) : void
     {
         $builder
             ->andWhere("$this->aliasedField LIKE :$this->paramName")

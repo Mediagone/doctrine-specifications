@@ -6,7 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class CallbackBuilder extends Specification
+class CallbackBuilder extends Specification
 {
     //========================================================================================================
     // Constructors
@@ -37,7 +37,7 @@ final class CallbackBuilder extends Specification
     // Methods
     //========================================================================================================
     
-    public function modifyBuilder(QueryBuilder $builder) : void
+    final public function modifyBuilder(QueryBuilder $builder) : void
     {
         ($this->callback)($builder);
     }

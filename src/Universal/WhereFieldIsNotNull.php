@@ -6,7 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class WhereFieldIsNotNull extends Specification
+class WhereFieldIsNotNull extends Specification
 {
     //========================================================================================================
     // Constructors
@@ -37,7 +37,7 @@ final class WhereFieldIsNotNull extends Specification
     // Methods
     //========================================================================================================
     
-    public function modifyBuilder(QueryBuilder $builder) : void
+    final public function modifyBuilder(QueryBuilder $builder) : void
     {
         $builder->andWhere("$this->aliasedField IS NOT NULL");
     }

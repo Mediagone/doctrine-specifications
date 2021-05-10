@@ -6,7 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class WhereFieldBetween extends Specification
+class WhereFieldBetween extends Specification
 {
     //========================================================================================================
     // Constructors

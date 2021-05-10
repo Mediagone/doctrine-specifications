@@ -6,7 +6,7 @@ use Doctrine\ORM\Query;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class CallbackQuery extends Specification
+class CallbackQuery extends Specification
 {
     //========================================================================================================
     // Constructors
@@ -37,7 +37,7 @@ final class CallbackQuery extends Specification
     // Methods
     //========================================================================================================
     
-    public function modifyQuery(Query $query) : void
+    final public function modifyQuery(Query $query) : void
     {
         ($this->callback)($query);
     }

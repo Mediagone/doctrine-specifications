@@ -8,7 +8,7 @@ use function array_values;
 use function implode;
 
 
-final class WhereFieldInArray extends Specification
+class WhereFieldInArray extends Specification
 {
     //========================================================================================================
     // Constructors
@@ -48,7 +48,7 @@ final class WhereFieldInArray extends Specification
     // Methods
     //========================================================================================================
     
-    public function modifyBuilder(QueryBuilder $builder) : void
+    final public function modifyBuilder(QueryBuilder $builder) : void
     {
         $params = [];
         $placeholders = [];

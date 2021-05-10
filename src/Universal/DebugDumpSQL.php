@@ -6,7 +6,7 @@ use Doctrine\ORM\Query;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class DebugDumpSQL extends Specification
+class DebugDumpSQL extends Specification
 {
     //========================================================================================================
     // Constructors
@@ -29,8 +29,9 @@ final class DebugDumpSQL extends Specification
     // Methods
     //========================================================================================================
     
-    public function modifyQuery(Query $query) : void
+    final public function modifyQuery(Query $query) : void
     {
+        /** @noinspection ForgottenDebugOutputInspection */
         dump($query->getSQL());
     }
     

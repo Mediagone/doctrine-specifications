@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-final class LimitResultsPaginate extends Specification
+class LimitResultsPaginate extends Specification
 {
     //========================================================================================================
     // Properties
@@ -49,7 +49,7 @@ final class LimitResultsPaginate extends Specification
     // Methods
     //========================================================================================================
     
-    public function modifyQuery(Query $query) : void
+    final public function modifyQuery(Query $query) : void
     {
         $query->setMaxResults($this->maxResults);
         
