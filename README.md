@@ -268,24 +268,24 @@ $totalArticleCount = $repository->find(
 
 To remove the hassle of creating custom specifications for most common usages, the library comes with built-in generic specifications you can use in your compounds:
 
-|Specification name|QueryBuilder condition|
-|---|:---:|
-|WhereFieldDifferentFrom|`field != value`|
-|WhereFieldEqualTo|`field = value`|
-|WhereFieldGreaterThan|`field > value`|
-|WhereFieldGreaterThanOrEqual|`field >= value`|
-|WhereFieldLesserThan|`field < value`|
-|WhereFieldLesserThanOrEqual|`field <= value`|
-|WhereFieldIn|`field IN (value)`|
-|WhereFieldInArray|`field IN (values,generated,list)`|
-|WhereFieldIsNull|`field IS NULL`|
-|WhereFieldIsNotNull|`field IS NOT NULL`|
-|WhereFieldLike|`field LIKE 'value'`|
-|WhereFieldBetween|`field >= min AND field <= max`|
-|WhereFieldBetweenExclusive|`field > min AND field < max`|
-|||
-|OrderResultsByAsc|`ORDER BY expression ASC`|
-|OrderResultsByDesc|`ORDER BY expression DESC`|
+|Compound method name|Specification classname|QueryBuilder condition|
+|---|---|:---:|
+|->whereFieldDifferentFrom(...)|WhereFieldDifferentFrom|`field != value`|
+|->whereFieldEqualTo(...)|WhereFieldEqualTo|`field = value`|
+|->whereFieldGreaterThan(...)|WhereFieldGreaterThan|`field > value`|
+|->whereFieldGreaterThanOrEqualTo(...)|WhereFieldGreaterThanOrEqualTo|`field >= value`|
+|->whereFieldLesserThan(...)|WhereFieldLesserThan|`field < value`|
+|->whereFieldLesserThanOrEqualTo(...)|WhereFieldLesserThanOrEqualTo|`field <= value`|
+|->whereFieldIn(...)|WhereFieldIn|`field IN (value)`|
+|->whereFieldInArray(...)|WhereFieldInArray|`field IN (values,generated,list)`|
+|->whereFieldIsNull(...)|WhereFieldIsNull|`field IS NULL`|
+|->whereFieldIsNotNull(...)|WhereFieldIsNotNull|`field IS NOT NULL`|
+|->whereFieldLike(...)|WhereFieldLike|`field LIKE 'value'`|
+|->whereFieldBetween(...)|WhereFieldBetween|`field >= min AND field <= max`|
+|->whereFieldBetweenExclusive(...)|WhereFieldBetweenExclusive|`field > min AND field < max`|
+||||
+|->orderResultsByAsc(...)|OrderResultsByAsc|`ORDER BY expression ASC`|
+|->orderResultsByDesc(...)|OrderResultsByDesc|`ORDER BY expression DESC`|
 
 ```php
 namespace Mediagone\Doctrine\Specifications\Universal\WhereFieldEqualTo;
