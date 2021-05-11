@@ -266,7 +266,7 @@ $totalArticleCount = $repository->find(
 
 ### Generic specifications
 
-To remove the hassle of creating custom specifications for most common usages, the library comes with built-in generic specifications you can use in your compounds:
+To remove the hassle of creating custom specifications for most common usages, the library comes with built-in generic specifications. They can be easily registered using the specific compound's protected methods:
 
 |Compound method name|Specification classname|QueryBuilder condition|
 |---|---|:---:|
@@ -287,9 +287,9 @@ To remove the hassle of creating custom specifications for most common usages, t
 |->orderResultsByAsc(...)|OrderResultsByAsc|`ORDER BY expression ASC`|
 |->orderResultsByDesc(...)|OrderResultsByDesc|`ORDER BY expression DESC`|
 
+Example of usage:
 ```php
-namespace Mediagone\Doctrine\Specifications\Universal\WhereFieldEqualTo;
-
+use Mediagone\Doctrine\Specifications\Universal\WhereFieldEqualTo;
 
 final class ManyArticle extends SpecificationCompound
 {
@@ -297,6 +297,9 @@ final class ManyArticle extends SpecificationCompound
     
     public function postedByUser(UserId $userId) : self
     {
+        // the following line
+        $this->whereFieldEqualTo('article.authorId', 'authorId',  $userId, 'app_userid');
+        // is equivalent to
         $this->addSpecification(WhereFieldEqualTo::specification('article.authorId', 'authorId',  $userId, 'app_userid'));
         
         return $this;
@@ -305,7 +308,7 @@ final class ManyArticle extends SpecificationCompound
 ```
 
 
-There are also some other specifications for pagination:
+There are also some other specifications available for results pagination:
 
 |Compound method name|Specification name|Note|
 |---|---|:---|
@@ -333,12 +336,35 @@ $articles = $repository->find(
 ```
 
 
-A last couple of specifications provide even more flexibility by allowing you to modify the QueryBuilder without having to create a separate class:
+A last couple of specifications provide even more flexibility by allowing you to modify the Doctrine QueryBuilder/Query without having to create separate classes:
 
 |Compound method name|Specification name|
 |---|---|
 |->modifyBuilder(...)|ModifyBuilder|
 |->modifyQuery(...)|ModifyQuery|
+
+```php
+use Doctrine\ORM\QueryBuilder;
+use Mediagone\Doctrine\Specifications\SpecificationCompound;
+
+final class ManyArticle extends SpecificationCompound
+{
+    // ...
+    
+    public function postedByOneOfBothUsers(UserId $userId, UserId $userId2) : self
+    {
+        $this->modifyBuilder(static function(QueryBuilder $builder) use ($userId, $userId2) {
+            $builder
+                ->andWhere('article.authorId = :authorId OR article.authorId = :authorId2')
+                ->setParameter('authorId', $userId)
+                ->setParameter('authorId2', $userId2)
+            ;
+        });
+        
+        return $this;
+    }
+}
+```
 
 
 ### Debugging
