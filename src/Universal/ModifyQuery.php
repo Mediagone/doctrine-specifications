@@ -6,7 +6,7 @@ use Doctrine\ORM\Query;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-class CallbackQuery extends Specification
+class ModifyQuery extends Specification
 {
     //========================================================================================================
     // Constructors

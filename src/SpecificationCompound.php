@@ -5,8 +5,8 @@ namespace Mediagone\Doctrine\Specifications;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
-use Mediagone\Doctrine\Specifications\Universal\CallbackQuery;
 use Mediagone\Doctrine\Specifications\Universal\ModifyBuilder;
+use Mediagone\Doctrine\Specifications\Universal\ModifyQuery;
 use Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL;
 use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
 use Mediagone\Doctrine\Specifications\Universal\OrderResultsByAsc;
@@ -207,9 +207,9 @@ abstract class SpecificationCompound
         return $this;
     }
     
-    final protected function callbackQuery(callable $callback) : self
+    final protected function modifyQuery(callable $callback) : self
     {
-        $this->addSpecification(CallbackQuery::specification($callback));
+        $this->addSpecification(ModifyQuery::specification($callback));
         return $this;
     }
 

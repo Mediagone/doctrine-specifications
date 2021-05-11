@@ -337,8 +337,8 @@ A last couple of specifications provide even more flexibility by allowing you to
 
 |Compound method name|Specification name|
 |---|---|
-|->callbackQuery(...)|CallbackQuery|
 |->modifyBuilder(...)|ModifyBuilder|
+|->modifyQuery(...)|ModifyQuery|
 
 
 ### Debugging
