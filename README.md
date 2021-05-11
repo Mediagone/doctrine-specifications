@@ -268,7 +268,7 @@ $totalArticleCount = $repository->find(
 
 To remove the hassle of creating custom specifications for most common usages, the library comes with built-in generic specifications. They can be easily registered using the specific compound's protected methods:
 
-|Compound method name|Specification classname|QueryBuilder condition|
+|Compound method name|Specification name|QueryBuilder condition|
 |---|---|:---:|
 |->whereFieldDifferentFrom(...)|WhereFieldDifferentFrom|`field != value`|
 |->whereFieldEqualTo(...)|WhereFieldEqualTo|`field = value`|
@@ -372,10 +372,10 @@ final class ManyArticle extends SpecificationCompound
 The `SpecificationCompound` class comes with built-in methods that adds debug oriented specifications to all compound classes, _you don't have to include them in your own compounds_:
 
 
-|Specification name|
-|---|
-|DebugDumpDQL|
-|DebugDumpSQL|
+|Compound method name|Specification name|
+|---|---|
+|->dumpDQL(...)|DebugDumpDQL|
+|->dumpSQL(...)|DebugDumpSQL|
 
 
 So you can easily dump the generated DQL and SQL with few method calls:
