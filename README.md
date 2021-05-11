@@ -307,11 +307,11 @@ final class ManyArticle extends SpecificationCompound
 
 There are also some other specifications for pagination:
 
-|Specification name|Note|
-|---|:---|
-|LimitResultsMaxCount|_Defines the (max) number of returned results._|
-|LimitResultsOffset|_Defines how many results to skip._|
-|LimitResultsPaginate|_Combines_ MaxCount _and_ Offset _effects, with different parameters._|
+|Compound method name|Specification name|Note|
+|---|---|:---|
+|->limitResultsOffset(...)|LimitResultsOffset|_Defines how many results to skip._|
+|->limitResultsMaxCount(...)|LimitResultsMaxCount|_Defines the (max) number of returned results._|
+|->limitResultsPaginate(...)|LimitResultsPaginate|_Combines_ MaxCount _and_ Offset _effects, with different parameters._|
 
 Exemple of usage:
 ```php

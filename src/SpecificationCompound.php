@@ -212,8 +212,28 @@ abstract class SpecificationCompound
         $this->addSpecification(ModifyQuery::specification($callback));
         return $this;
     }
-
-
+    
+    
+    
+    final protected function limitResultsOffset(int $offset) : self
+    {
+        $this->addSpecification(LimitResultsOffset::specification($offset));
+        return $this;
+    }
+    
+    final protected function limitResultsMaxCount(int $count) : self
+    {
+        $this->addSpecification(LimitResultsMaxCount::specification($count));
+        return $this;
+    }
+    
+    final protected function limitResultsPaginate(int $pageNumber, int $itemsPerPage) : self
+    {
+        $this->addSpecification(LimitResultsPaginate::specification($pageNumber, $itemsPerPage));
+        return $this;
+    }
+    
+    
     
     //========================================================================================================
     // Generic specifications
