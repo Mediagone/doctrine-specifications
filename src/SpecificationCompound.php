@@ -97,143 +97,123 @@ abstract class SpecificationCompound
     // Generic specifications
     //========================================================================================================
     
-    final protected function whereFieldEqualTo(string $aliasedField, string $paramName, $value, ?string $paramType = null) : self
+    final protected function whereFieldEqualTo(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
         $this->addSpecification(WhereFieldEqualTo::specification($aliasedField, $paramName, $value, $paramType));
-        return $this;
     }
     
-    final protected function whereFieldDifferentFrom(string $aliasedField, string $paramName, $value, ?string $paramType = null) : self
+    final protected function whereFieldDifferentFrom(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
         $this->addSpecification(WhereFieldDifferentFrom::specification($aliasedField, $paramName, $value, $paramType));
-        return $this;
     }
     
     
     
-    final protected function whereFieldGreaterThan(string $aliasedField, string $paramName, $value, ?string $paramType = null) : self
+    final protected function whereFieldGreaterThan(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
         $this->addSpecification(WhereFieldGreaterThan::specification($aliasedField, $paramName, $value, $paramType));
-        return $this;
     }
     
-    final protected function whereFieldGreaterThanOrEqual(string $aliasedField, string $paramName, $value, ?string $paramType = null) : self
+    final protected function whereFieldGreaterThanOrEqual(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
         $this->addSpecification(WhereFieldGreaterThanOrEqualTo::specification($aliasedField, $paramName, $value, $paramType));
-        return $this;
     }
     
     
     
-    final protected function whereFieldLesserThan(string $aliasedField, string $paramName, $value, ?string $paramType = null) : self
+    final protected function whereFieldLesserThan(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
         $this->addSpecification(WhereFieldLesserThan::specification($aliasedField, $paramName, $value, $paramType));
-        return $this;
     }
     
-    final protected function whereFieldLesserThanOrEqualTo(string $aliasedField, string $paramName, $value, ?string $paramType = null) : self
+    final protected function whereFieldLesserThanOrEqualTo(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
         $this->addSpecification(WhereFieldLesserThanOrEqualTo::specification($aliasedField, $paramName, $value, $paramType));
-        return $this;
     }
     
     
     
-    final protected function whereFieldIn(string $aliasedField, string $value) : self
+    final protected function whereFieldIn(string $aliasedField, string $value) : void
     {
         $this->addSpecification(WhereFieldIn::specification($aliasedField, $value));
-        return $this;
     }
     
-    final protected function whereFieldInArray(string $aliasedField, string $paramName, array $values, ?string $paramType = null) : self
+    final protected function whereFieldInArray(string $aliasedField, string $paramName, array $values, ?string $paramType = null) : void
     {
         $this->addSpecification(WhereFieldInArray::specification($aliasedField, $paramName, $values, $paramType));
-        return $this;
     }
     
     
     
-    final protected function whereFieldIsNull(string $aliasedField) : self
+    final protected function whereFieldIsNull(string $aliasedField) : void
     {
         $this->addSpecification(WhereFieldIsNull::specification($aliasedField));
-        return $this;
     }
     
-    final protected function whereFieldIsNotNull(string $aliasedField) : self
+    final protected function whereFieldIsNotNull(string $aliasedField) : void
     {
         $this->addSpecification(WhereFieldIsNotNull::specification($aliasedField));
-        return $this;
     }
     
     
     
-    final protected function whereFieldLike(string $aliasedField, string $paramName, string $value) : self
+    final protected function whereFieldLike(string $aliasedField, string $paramName, string $value) : void
     {
         $this->addSpecification(WhereFieldLike::specification($aliasedField, $paramName, $value));
-        return $this;
     }
     
     
     
-    final protected function whereFieldBetween(string $aliasedField, string $paramName, $valueMin, $valueMax, ?string $paramType = null) : self
+    final protected function whereFieldBetween(string $aliasedField, string $paramName, $valueMin, $valueMax, ?string $paramType = null) : void
     {
         $this->addSpecification(WhereFieldBetween::specification($aliasedField, $paramName, $valueMin, $valueMax, $paramType));
-        return $this;
     }
     
-    final protected function whereFieldBetweenExclusive(string $aliasedField, string $paramName, $valueMin, $valueMax, ?string $paramType = null) : self
+    final protected function whereFieldBetweenExclusive(string $aliasedField, string $paramName, $valueMin, $valueMax, ?string $paramType = null) : void
     {
         $this->addSpecification(WhereFieldBetweenExclusive::specification($aliasedField, $paramName, $valueMin, $valueMax, $paramType));
-        return $this;
     }
     
     
     
-    final protected function orderResultsByAsc(string $expression) : self
+    final protected function orderResultsByAsc(string $expression) : void
     {
         $this->addSpecification(OrderResultsByAsc::specification($expression));
-        return $this;
     }
     
-    final protected function orderResultsByDesc(string $expression) : self
+    final protected function orderResultsByDesc(string $expression) : void
     {
         $this->addSpecification(OrderResultsByDesc::specification($expression));
-        return $this;
     }
     
     
     
     
-    final protected function modifyBuilder(callable $callback) : self
+    final protected function modifyBuilder(callable $callback) : void
     {
         $this->addSpecification(ModifyBuilder::specification($callback));
-        return $this;
     }
     
-    final protected function modifyQuery(callable $callback) : self
+    final protected function modifyQuery(callable $callback) : void
     {
         $this->addSpecification(ModifyQuery::specification($callback));
-        return $this;
     }
     
     
     
-    final protected function limitResultsOffset(int $offset) : self
+    final protected function limitResultsOffset(int $offset) : void
     {
         $this->addSpecification(LimitResultsOffset::specification($offset));
-        return $this;
     }
     
-    final protected function limitResultsMaxCount(int $count) : self
+    final protected function limitResultsMaxCount(int $count) : void
     {
         $this->addSpecification(LimitResultsMaxCount::specification($count));
-        return $this;
     }
     
-    final protected function limitResultsPaginate(int $pageNumber, int $itemsPerPage) : self
+    final protected function limitResultsPaginate(int $pageNumber, int $itemsPerPage) : void
     {
         $this->addSpecification(LimitResultsPaginate::specification($pageNumber, $itemsPerPage));
-        return $this;
     }
     
     
