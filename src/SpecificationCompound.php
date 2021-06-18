@@ -66,7 +66,7 @@ abstract class SpecificationCompound
     // Constructors
     //========================================================================================================
     
-    final protected function __construct(Specification $specification, int $repositoryResult)
+    final protected function __construct(int $repositoryResult, Specification... $specifications)
     {
         if (! in_array($repositoryResult, [
             SpecificationRepositoryResult::MANY_OBJECTS,
@@ -75,9 +75,11 @@ abstract class SpecificationCompound
         ])) {
             throw new InvalidArgumentException('Invalid SpecificationRepositoryResult value, use one of the following constants: MANY_OBJECTS, SINGLE_OBJECT or SINGLE_SCALAR.');
         }
-        
-        $this->specifications[] = $specification;
+    
         $this->repositoryResult = $repositoryResult;
+        foreach ($specifications as $spec) {
+            $this->specifications[] = $spec;
+        }
     }
     
     
