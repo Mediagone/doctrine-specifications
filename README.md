@@ -270,12 +270,12 @@ To remove the hassle of creating custom specifications for most common usages, t
 
 |Compound method name|Specification name|QueryBuilder condition|
 |---|---|:---:|
-|->whereFieldDifferentFrom(...)|WhereFieldDifferentFrom|`field != value`|
-|->whereFieldEqualTo(...)|WhereFieldEqualTo|`field = value`|
-|->whereFieldGreaterThan(...)|WhereFieldGreaterThan|`field > value`|
-|->whereFieldGreaterThanOrEqualTo(...)|WhereFieldGreaterThanOrEqualTo|`field >= value`|
-|->whereFieldLesserThan(...)|WhereFieldLesserThan|`field < value`|
-|->whereFieldLesserThanOrEqualTo(...)|WhereFieldLesserThanOrEqualTo|`field <= value`|
+|->whereFieldDifferent(...)|WhereFieldDifferent|`field != value`|
+|->whereFieldEqual(...)|WhereFieldEqual|`field = value`|
+|->whereFieldGreater(...)|WhereFieldGreater|`field > value`|
+|->whereFieldGreaterOrEqual(...)|WhereFieldGreaterOrEqual|`field >= value`|
+|->whereFieldLesser(...)|WhereFieldLesser|`field < value`|
+|->whereFieldLesserOrEqual(...)|WhereFieldLesserOrEqual|`field <= value`|
 |->whereFieldIn(...)|WhereFieldIn|`field IN (value)`|
 |->whereFieldInArray(...)|WhereFieldInArray|`field IN (values,generated,list)`|
 |->whereFieldIsNull(...)|WhereFieldIsNull|`field IS NULL`|
@@ -288,8 +288,9 @@ To remove the hassle of creating custom specifications for most common usages, t
 |->orderResultsByDesc(...)|OrderResultsByDesc|`ORDER BY expression DESC`|
 
 Example of usage:
+
 ```php
-use Mediagone\Doctrine\Specifications\Universal\WhereFieldEqualTo;
+use Mediagone\Doctrine\Specifications\Universal\WhereFieldEqual;
 
 final class ManyArticle extends SpecificationCompound
 {
@@ -298,9 +299,9 @@ final class ManyArticle extends SpecificationCompound
     public function postedByUser(UserId $userId) : self
     {
         // the following line
-        $this->whereFieldEqualTo('article.authorId', 'authorId',  $userId, 'app_userid');
+        $this->whereFieldEqual('article.authorId', 'authorId',  $userId, 'app_userid');
         // is equivalent to
-        $this->addSpecification(WhereFieldEqualTo::specification('article.authorId', 'authorId',  $userId, 'app_userid'));
+        $this->addSpecification(WhereFieldEqual::specification('article.authorId', 'authorId',  $userId, 'app_userid'));
         
         return $this;
     }
