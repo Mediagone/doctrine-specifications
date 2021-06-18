@@ -6,7 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-class SelectJoinLeft extends Specification
+class JoinInner extends Specification
 {
     //========================================================================================================
     // Constructors
@@ -50,7 +50,7 @@ class SelectJoinLeft extends Specification
     {
         $conditionType = $this->condition !== null ? 'WITH' : null;
         
-        $builder->leftJoin($this->join, $this->alias, $conditionType, $this->condition, $this->indexBy);
+        $builder->innerJoin($this->join, $this->alias, $conditionType, $this->condition, $this->indexBy);
     }
     
     
