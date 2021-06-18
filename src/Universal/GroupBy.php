@@ -6,7 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Mediagone\Doctrine\Specifications\Specification;
 
 
-class GroupBySpec extends Specification
+class GroupBy extends Specification
 {
     //========================================================================================================
     // Constructors

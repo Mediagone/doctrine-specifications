@@ -5,27 +5,27 @@ namespace Mediagone\Doctrine\Specifications;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
+use Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL;
+use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
 use Mediagone\Doctrine\Specifications\Universal\LimitResultsMaxCount;
 use Mediagone\Doctrine\Specifications\Universal\LimitResultsOffset;
 use Mediagone\Doctrine\Specifications\Universal\LimitResultsPaginate;
 use Mediagone\Doctrine\Specifications\Universal\ModifyBuilder;
 use Mediagone\Doctrine\Specifications\Universal\ModifyQuery;
-use Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL;
-use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
 use Mediagone\Doctrine\Specifications\Universal\OrderResultsByAsc;
 use Mediagone\Doctrine\Specifications\Universal\OrderResultsByDesc;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldBetween;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldBetweenExclusive;
-use Mediagone\Doctrine\Specifications\Universal\WhereFieldDifferentFrom;
-use Mediagone\Doctrine\Specifications\Universal\WhereFieldEqualTo;
-use Mediagone\Doctrine\Specifications\Universal\WhereFieldGreaterThan;
-use Mediagone\Doctrine\Specifications\Universal\WhereFieldGreaterThanOrEqualTo;
+use Mediagone\Doctrine\Specifications\Universal\WhereFieldDifferent;
+use Mediagone\Doctrine\Specifications\Universal\WhereFieldEqual;
+use Mediagone\Doctrine\Specifications\Universal\WhereFieldGreater;
+use Mediagone\Doctrine\Specifications\Universal\WhereFieldGreaterOrEqual;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldIn;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldInArray;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldIsNotNull;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldIsNull;
-use Mediagone\Doctrine\Specifications\Universal\WhereFieldLesserThan;
-use Mediagone\Doctrine\Specifications\Universal\WhereFieldLesserThanOrEqualTo;
+use Mediagone\Doctrine\Specifications\Universal\WhereFieldLesser;
+use Mediagone\Doctrine\Specifications\Universal\WhereFieldLesserOrEqual;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldLike;
 use function in_array;
 
@@ -97,38 +97,38 @@ abstract class SpecificationCompound
     // Generic specifications
     //========================================================================================================
     
-    final protected function whereFieldEqualTo(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
+    final protected function whereFieldEqual(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
-        $this->addSpecification(WhereFieldEqualTo::specification($aliasedField, $paramName, $value, $paramType));
+        $this->addSpecification(WhereFieldEqual::specification($aliasedField, $paramName, $value, $paramType));
     }
     
-    final protected function whereFieldDifferentFrom(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
+    final protected function whereFieldDifferent(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
-        $this->addSpecification(WhereFieldDifferentFrom::specification($aliasedField, $paramName, $value, $paramType));
-    }
-    
-    
-    
-    final protected function whereFieldGreaterThan(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
-    {
-        $this->addSpecification(WhereFieldGreaterThan::specification($aliasedField, $paramName, $value, $paramType));
-    }
-    
-    final protected function whereFieldGreaterThanOrEqual(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
-    {
-        $this->addSpecification(WhereFieldGreaterThanOrEqualTo::specification($aliasedField, $paramName, $value, $paramType));
+        $this->addSpecification(WhereFieldDifferent::specification($aliasedField, $paramName, $value, $paramType));
     }
     
     
     
-    final protected function whereFieldLesserThan(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
+    final protected function whereFieldGreater(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
-        $this->addSpecification(WhereFieldLesserThan::specification($aliasedField, $paramName, $value, $paramType));
+        $this->addSpecification(WhereFieldGreater::specification($aliasedField, $paramName, $value, $paramType));
     }
     
-    final protected function whereFieldLesserThanOrEqualTo(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
+    final protected function whereFieldGreaterOrEqual(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
-        $this->addSpecification(WhereFieldLesserThanOrEqualTo::specification($aliasedField, $paramName, $value, $paramType));
+        $this->addSpecification(WhereFieldGreaterOrEqual::specification($aliasedField, $paramName, $value, $paramType));
+    }
+    
+    
+    
+    final protected function whereFieldLesser(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
+    {
+        $this->addSpecification(WhereFieldLesser::specification($aliasedField, $paramName, $value, $paramType));
+    }
+    
+    final protected function whereFieldLesserOrEqual(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
+    {
+        $this->addSpecification(WhereFieldLesserOrEqual::specification($aliasedField, $paramName, $value, $paramType));
     }
     
     

@@ -3,12 +3,12 @@
 namespace Mediagone\Doctrine\Specifications\Universal;
 
 
-class WhereFieldDifferentFrom extends WhereField
+class WhereFieldLesser extends WhereField
 {
     
     public static function specification(string $aliasedField, string $paramName, $value, ?string $paramType = null) : self
     {
-        return new self($aliasedField, $paramName, '!=', $value, $paramType);
+        return new self($aliasedField, $paramName, '<', $value, $paramType);
     }
     
 }
