@@ -8,6 +8,8 @@ use InvalidArgumentException;
 use Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL;
 use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
 use Mediagone\Doctrine\Specifications\Universal\Having;
+use Mediagone\Doctrine\Specifications\Universal\JoinInner;
+use Mediagone\Doctrine\Specifications\Universal\JoinLeft;
 use Mediagone\Doctrine\Specifications\Universal\LimitResultsMaxCount;
 use Mediagone\Doctrine\Specifications\Universal\LimitResultsOffset;
 use Mediagone\Doctrine\Specifications\Universal\LimitResultsPaginate;
@@ -109,6 +111,16 @@ abstract class SpecificationCompound
     final protected function having(string $having) : void
     {
         $this->addSpecification(Having::specification($having));
+    }
+    
+    final protected function joinLeft(string $join, string $alias, ?string $condition = null, ?string $indexBy = null) : void
+    {
+        $this->addSpecification(JoinLeft::specification($join, $alias, $condition, $indexBy));
+    }
+    
+    final protected function joinInner(string $join, string $alias, ?string $condition = null, ?string $indexBy = null) : void
+    {
+        $this->addSpecification(JoinInner::specification($join, $alias, $condition, $indexBy));
     }
     
     
