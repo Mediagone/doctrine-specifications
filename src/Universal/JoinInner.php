@@ -4,6 +4,7 @@ namespace Mediagone\Doctrine\Specifications\Universal;
 
 use Doctrine\ORM\QueryBuilder;
 use Mediagone\Doctrine\Specifications\Specification;
+use function in_array;
 
 
 class JoinInner extends Specification
@@ -48,9 +49,10 @@ class JoinInner extends Specification
     
     final public function modifyBuilder(QueryBuilder $builder) : void
     {
-        $conditionType = $this->condition !== null ? 'WITH' : null;
-        
-        $builder->innerJoin($this->join, $this->alias, $conditionType, $this->condition, $this->indexBy);
+        if (! in_array($this->alias, $builder->getAllAliases(), true)) {
+            $conditionType = $this->condition !== null ? 'WITH' : null;
+            $builder->innerJoin($this->join, $this->alias, $conditionType, $this->condition, $this->indexBy);
+        }
     }
     
     
