@@ -7,6 +7,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
 use Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL;
 use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
+use Mediagone\Doctrine\Specifications\Universal\Having;
 use Mediagone\Doctrine\Specifications\Universal\LimitResultsMaxCount;
 use Mediagone\Doctrine\Specifications\Universal\LimitResultsOffset;
 use Mediagone\Doctrine\Specifications\Universal\LimitResultsPaginate;
@@ -14,6 +15,7 @@ use Mediagone\Doctrine\Specifications\Universal\ModifyBuilder;
 use Mediagone\Doctrine\Specifications\Universal\ModifyQuery;
 use Mediagone\Doctrine\Specifications\Universal\OrderResultsByAsc;
 use Mediagone\Doctrine\Specifications\Universal\OrderResultsByDesc;
+use Mediagone\Doctrine\Specifications\Universal\Select;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldBetween;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldBetweenExclusive;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldDifferent;
@@ -98,6 +100,18 @@ abstract class SpecificationCompound
     //========================================================================================================
     // Generic specifications
     //========================================================================================================
+    
+    final protected function select(string $select) : void
+    {
+        $this->addSpecification(Select::specification($select));
+    }
+    
+    final protected function having(string $having) : void
+    {
+        $this->addSpecification(Having::specification($having));
+    }
+    
+    
     
     final protected function whereFieldEqual(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
