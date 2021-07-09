@@ -18,6 +18,7 @@ use Mediagone\Doctrine\Specifications\Universal\ModifyQuery;
 use Mediagone\Doctrine\Specifications\Universal\OrderResultsByAsc;
 use Mediagone\Doctrine\Specifications\Universal\OrderResultsByDesc;
 use Mediagone\Doctrine\Specifications\Universal\Select;
+use Mediagone\Doctrine\Specifications\Universal\SetParameter;
 use Mediagone\Doctrine\Specifications\Universal\WhereClause;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldBetween;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldBetweenExclusive;
@@ -207,6 +208,13 @@ abstract class SpecificationCompound
     {
         $this->addSpecification(WhereFieldBetweenExclusive::specification($aliasedField, $paramName, $valueMin, $valueMax, $paramType));
     }
+    
+    
+    final protected function setParameter(string $paramName, $value, ?string $paramType = null) : void
+    {
+        $this->addSpecification(SetParameter::specification($paramName, $value, $paramType));
+    }
+    
     
     
     
