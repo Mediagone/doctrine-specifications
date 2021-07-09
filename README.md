@@ -270,6 +270,7 @@ To remove the hassle of creating custom specifications for most common usages, t
 
 |Compound method name|Specification name|QueryBuilder condition|
 |---|---|:---:|
+|->whereClause(...)|WhereClause|*custom where clause*|
 |->whereFieldDifferent(...)|WhereFieldDifferent|`field != value`|
 |->whereFieldEqual(...)|WhereFieldEqual|`field = value`|
 |->whereFieldGreater(...)|WhereFieldGreater|`field > value`|

@@ -18,6 +18,7 @@ use Mediagone\Doctrine\Specifications\Universal\ModifyQuery;
 use Mediagone\Doctrine\Specifications\Universal\OrderResultsByAsc;
 use Mediagone\Doctrine\Specifications\Universal\OrderResultsByDesc;
 use Mediagone\Doctrine\Specifications\Universal\Select;
+use Mediagone\Doctrine\Specifications\Universal\WhereClause;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldBetween;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldBetweenExclusive;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldDifferent;
@@ -124,6 +125,11 @@ abstract class SpecificationCompound
     }
     
     
+    
+    final protected function whereClause(string $whereClause) : void
+    {
+        $this->addSpecification(WhereClause::specification($whereClause));
+    }
     
     final protected function whereFieldEqual(string $aliasedField, string $paramName, $value, ?string $paramType = null) : void
     {
