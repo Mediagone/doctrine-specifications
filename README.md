@@ -33,19 +33,20 @@ It will also make hydration of custom *read models* a breeze.
 
 ## Summary
 
-1. [Example of usage](#example)
-2. [Extended usages](#extended)
+1. [Introduction](#intro)
+2. [Example of usage](#example)
+3. [Extended usages](#extended)
     1. [Return formats](#formats)
     2. [Joins](#joins)
     3. [Read models](#readmodels)
     4. [Using multiple Entity Managers](#multipleem)
     5. [Command bus](#commandbus)
-3. [Generic specifications](#generic)
+4. [Generic specifications](#generic)
     1. [Select specifications](#spec-select)
     2. [Filter specifications](#spec-filter)
     3. [Additional specifications](#spec-more)
     4. [Debug specifications](#spec-debug)
-4. [Organizing specifications](#organize)
+5. [Organizing specifications](#organize)
 
 ## Installation
 This package requires **PHP 7.4+** and Doctrine **ORM 2.7+**
@@ -56,7 +57,7 @@ Add it as Composer dependency:
 $ composer require mediagone/doctrine-specifications
 ```
 
-## Introduction
+## <a name="intro"></a>Introduction
 
 The classic _Repository pattern_ (a single class per entity with several methods, one per query) quickly shows its limitations as it grows toward a messy god-class.
 
