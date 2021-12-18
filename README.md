@@ -43,7 +43,7 @@ If you like it, you probably need this package ;)
 3. [Generic specifications](#generic)
     1. [Select specifications](#spec-select)
     2. [Filter specifications](#spec-filter)
-    3.[Additional specifications](#spec-more)
+    3. [Additional specifications](#spec-more)
     4. [Debug specifications](#spec-debug)
 4. [Organizing specifications](#organize)
 
