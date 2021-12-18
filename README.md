@@ -25,9 +25,10 @@ $articles = $repository->find(
     ->paginate($pageNumber, $itemsPerPage)
 );
 ```
-Combinations of criteria are unlimited, without any code duplication!
-
 If you like it, you probably need this package ;)
+
+Combinations of criteria are unlimited, without any code duplication. \
+It will also make hydration of custom *read models* a breeze.
 
 
 ## Summary
