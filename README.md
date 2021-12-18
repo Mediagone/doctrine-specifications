@@ -62,7 +62,8 @@ $ composer require mediagone/doctrine-specifications
 The classic _Repository pattern_ (a single class per entity with several methods, one per query) quickly shows its limitations as it grows toward a messy god-class.
 
 Using _[Query Functions](https://ocramius.github.io/doctrine-best-practices/#/90)_ partially solves the problem by splitting up queries into separate classes, but you might still get a lot of code duplication. Things get worse if query criteria can be combined arbitrarily, which may result in the creation of an exponential number of classes. \
-The _[Specifications pattern](https://en.wikipedia.org/wiki/Specification_pattern)_ comes to the rescue helping you to split them into explicit and reusable filters, improving useability and testability of your database queries. This package is a customized flavor of this pattern, inspired by Benjamin Eberlei's [article](https://beberlei.de/2013/03/04/doctrine_repositories.html). It revolves around a simple concept: specifications. \
+The _[Specifications pattern](https://en.wikipedia.org/wiki/Specification_pattern)_ comes to the rescue helping you to split them into explicit and reusable filters, improving useability and testability of your database queries. This package is a customized flavor of this pattern (for purists), inspired by Benjamin Eberlei's [article](https://beberlei.de/2013/03/04/doctrine_repositories.html). It revolves around a simple concept: _specifications_.
+
 Each specification defines a set of criteria that will be automatically applied to Doctrine's QueryBuilder and Query objects, with the help of two methods:
 ```php
 abstract class Specification
@@ -161,8 +162,7 @@ final class ManyArticles extends SpecificationCompound
 }
 ```
 
-> 💡 This is how we create _custom specification_, but having to create a new class for each criterion is really cumbersome. Hopefully, the library provides many generic specifications you can reuse for common usages (see the [Generic specifications](#generic) section below).
-
+This is how we create a _custom specification_, but having to create a new class for each criterion is really cumbersome. Hopefully, the library provides many generic specifications you can reuse for common usages (see the [Generic specifications](#generic) section below).
 
 So, we can replace our custom specification by the generic one:
 ```php
@@ -438,7 +438,7 @@ The normal way to get an Article with the name of it's category would be to quer
 
 That's why Doctrine offers a way to hydrate custom classes by using the **NEW** operator (see [official documentation](https://www.doctrine-project.org/projects/doctrine-orm/en/2.9/reference/dql-doctrine-query-language.html#new-operator-syntax)).
 
-Keeping in sync the query's _selected fields_ and the DTO's _constructor's parameters_ might be tedious, that's why we also provides an interface to handle things for you:
+Keeping in sync the query's _selected fields_ and the DTO's _constructor's parameters_ might be tedious, that's why the package also provides an interface to handle things for you:
 ```php
 final class ArticleModel implements SpecificationReadModel
 {
