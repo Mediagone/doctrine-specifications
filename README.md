@@ -27,13 +27,14 @@ $articles = $repository->find(
     ->paginate($pageNumber, $itemsPerPage)
 );
 ```
-Combinations of criteria are unlimited, without any code duplication! \
+Combinations of criteria are unlimited, without any code duplication!
+
 If you like it, you probably need this package ;)
 
 
 ## Summary
 
-1. [Examples](#examples)
+1. [Example of usage](#example)
 2. [Extended usages](#extended)
     1. [Return formats](#formats)
     2. [Joins](#joins)
@@ -74,7 +75,7 @@ abstract class Specification
 Specifications can be combined to build complex queries, while remaining **easily testable and maintainable** separately.
 
 
-## <a name="examples"></a>Examples
+## <a name="example"></a>Example of usage
 
 We'll learn together how to create the following query:
 ```php
