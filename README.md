@@ -100,7 +100,7 @@ First, we need to create our main class that will be updated later in our exampl
 We'll use a static factory method `asEntity()` to build our query object and define its return type. Here we want to get back results as _entities_, but we could hydrate instead a _read model_ (DTO) (eg. `asModel()`) or return a scalar value (eg. `asCount()`).  
 
 ```php
-namespace App\Blog\Query\Article; // Example namespace, choose what fits best to your project
+namespace App\Blog\Article\Query; // Example namespace, choose what fits best to your project
 
 use Mediagone\Doctrine\Specifications\SpecificationCompound;
 
@@ -127,7 +127,7 @@ _Notes:_
 
 Our first specification defines the selected entity in our query builder by overloading the `modifyBuilder` method:
 ```php
-namespace App\Blog\Query\Article\Specifications; // Example namespace
+namespace App\Blog\Article\Query\Specifications; // Example namespace
 
 use App\Blog\Article; // assumed FQCN of your entity
 use Doctrine\ORM\QueryBuilder;
@@ -145,7 +145,7 @@ final class SelectArticleEntity extends Specification
 Let's register it in our specification compound:
 ```php
 ...
-use App\Blog\Query\Article\Specifications\SelectArticleEntity;
+use App\Blog\Article\Query\Specifications\SelectArticleEntity;
 use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
 
 final class ManyArticles extends SpecificationCompound
@@ -166,7 +166,7 @@ final class ManyArticles extends SpecificationCompound
 So, we can replace our custom specification by the generic one:
 ```php
 use App\Blog\Article;
-use App\Blog\Query\Article\Specifications\SelectArticleEntity;
+use App\Blog\Article\Query\Specifications\SelectArticleEntity;
 use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
 
 final class ManyArticles extends SpecificationCompound
