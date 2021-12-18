@@ -166,8 +166,8 @@ final class ManyArticles extends SpecificationCompound
 So, we can replace our custom specification by the generic one:
 ```php
 use App\Blog\Article;
-use App\Blog\Article\Query\Specifications\SelectArticleEntity;
 use Mediagone\Doctrine\Specifications\SpecificationRepositoryResult;
+use Mediagone\Doctrine\Specifications\Universal\SelectEntity;
 
 final class ManyArticles extends SpecificationCompound
 {
