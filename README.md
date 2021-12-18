@@ -291,7 +291,8 @@ final class ManyArticles extends SpecificationCompound
     {
         return new self(
             SpecificationRepositoryResult::MANY_OBJECTS,
-            SelectEntity::specification(Article::class, 'article') // return results as Article instances
+            // Return results as Article instances
+            SelectEntity::specification(Article::class, 'article')
         );
     }
     
@@ -299,7 +300,8 @@ final class ManyArticles extends SpecificationCompound
     {
         return new self(
             SpecificationRepositoryResult::MANY_OBJECTS,
-            SelectReadModel::specification(Article::class, 'article', ArticleModel::class) // return results as ArticleModel instances
+            // Return results as ArticleModel instances
+            SelectReadModel::specification(Article::class, 'article', ArticleModel::class) 
         );
     }
 
@@ -307,7 +309,8 @@ final class ManyArticles extends SpecificationCompound
     {
         return new self(
             SpecificationRepositoryResult::SINGLE_SCALAR,
-            SelectCount::specification(Article::class, 'article') // return the number of results
+            // Return the number of results
+            SelectCount::specification(Article::class, 'article')
         );
     }
 }
