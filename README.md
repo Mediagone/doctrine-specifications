@@ -363,7 +363,6 @@ $articleCount = $repository->find(
 ### <a name="joins"></a>Joins
 
 You can define query joins very easily by adding them in the static constructor. \
-Note that it will be *applied to all your queries*:
 ```php
 final class ManyArticles extends SpecificationCompound
 {
@@ -372,13 +371,15 @@ final class ManyArticles extends SpecificationCompound
         return new self(
             SpecificationRepositoryResult::MANY_OBJECTS,
             SelectEntity::specification(Article::class, 'article')
+            // Join will be applied anytime
             JoinLeft::specification('article.category', 'category'),
         );
     }
 }
 ```
 
-If you want to join only when really needed, you can define the join only for a given specification:
+Note that the join will be *applied to all your queries*. \
+But if you want to join only on demand, you can define it only for a given specification:
 
 ```php
 final class ManyArticles extends SpecificationCompound
