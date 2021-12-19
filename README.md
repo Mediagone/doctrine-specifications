@@ -94,6 +94,40 @@ Each method splits the query into separate "specifications":
 - _orderedAlphabetically_ => `OrderArticleAlphabetically` specification
 - _maxCount_ => `LimitMaxCount` specification
 
+It will result in this clean query class:
+```php
+final class ManyArticles extends SpecificationCompound
+{
+    public static function asEntity() : self
+    {
+        return new self(
+            SpecificationRepositoryResult::MANY_OBJECTS,
+            SelectEntity::specification(Article::class, 'article'),
+        );
+    }
+    
+    public function postedByUser(UserId $userId) : self
+    {
+        $this->whereFieldEqual('article.user', 'userId', $userId);
+        return $this;
+    }
+    
+    public function orderedAlphabetically() : self
+    {
+        $this->orderResultsByAsc('article.title');
+        return $this;
+    }
+    
+    public function maxCount(int $count) : self
+    {
+        $this->limitResultsMaxCount($count);
+        return $this;
+    }
+}
+```
+
+We'll now explain step by step how to build this class:
+
 
 ### SpecificationCompound class
 
