@@ -471,9 +471,9 @@ class Category
 
 The normal way to get an Article with the name of it's category would be to query the entity and the related Category entity. But it leads to both objects hydration, and potentially multiple queries (depending on the fetch mode used).
 
-That's why Doctrine offers a way to hydrate custom classes by using the **NEW** operator (see [official documentation](https://www.doctrine-project.org/projects/doctrine-orm/en/2.9/reference/dql-doctrine-query-language.html#new-operator-syntax)).
+Helpfully, Doctrine offers a way to hydrate custom classes by using the **NEW** operator (see [official documentation](https://www.doctrine-project.org/projects/doctrine-orm/en/2.9/reference/dql-doctrine-query-language.html#new-operator-syntax)).
 
-Keeping in sync the query's _selected fields_ and the DTO's _constructor's parameters_ might be tedious, that's why the package also provides an interface to handle things for you:
+Keeping in sync the query's _selected fields_ and the DTO's _constructor's parameters_ might be tedious, that's why the package also provides an interface to handle everything for you:
 ```php
 final class ArticleModel implements SpecificationReadModel
 {
