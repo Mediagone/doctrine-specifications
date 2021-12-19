@@ -477,9 +477,10 @@ Keeping in sync the query's _selected fields_ and the DTO's _constructor's param
 ```php
 final class ArticleModel implements SpecificationReadModel
 {
-    private string $id;
+    private int $id;
     private string $title;
     private string $content;
+    private int $categoryId;
     private string $categoryName;
     
     // Keep field list close to the constructor's definition that uses it.
@@ -489,19 +490,22 @@ final class ArticleModel implements SpecificationReadModel
             'article.id',
             'article.title',
             'article.content',
+            'category.id',
             'category.name',
         ];
     }
     
     public function __construct(
-        string $id,
+        int $id,
         string $title,
         string $content,
+        int $categoryId,
         string $categoryName,
     ) {
         $this->id = $id;
         $this->title = $title;
         $this->content = $content;
+        $this->categoryId = $categoryId;
         $this->categoryName = $categoryName;
     }
 }
