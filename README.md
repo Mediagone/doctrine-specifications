@@ -597,6 +597,8 @@ Specifications usable in criteria methods:
 |->whereFieldLike(...)|WhereFieldLike|`field LIKE 'value'`|
 |->whereFieldBetween(...)|WhereFieldBetween|`field >= min AND field <= max`|
 |->whereFieldBetweenExclusive(...)|WhereFieldBetweenExclusive|`field > min AND field < max`|
+| ->whereFieldNotIn(...)            | WhereFieldNotIn               |         `field NOT IN (value)`         |
+| ->whereFieldNotInArray(...)       | WhereFieldNotInArray          | `field NOT IN (values,generated,list)` |
 ||||
 |->orderResultsByAsc(...)|OrderResultsByAsc|`ORDER BY expression ASC`|
 |->orderResultsByDesc(...)|OrderResultsByDesc|`ORDER BY expression DESC`|

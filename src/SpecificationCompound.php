@@ -5,6 +5,7 @@ namespace Mediagone\Doctrine\Specifications;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
+use Mediagone\CQRS\Bus\Domain\Query\Query;
 use Mediagone\Doctrine\Specifications\Universal\DebugDumpDQL;
 use Mediagone\Doctrine\Specifications\Universal\DebugDumpSQL;
 use Mediagone\Doctrine\Specifications\Universal\Having;
@@ -33,6 +34,8 @@ use Mediagone\Doctrine\Specifications\Universal\WhereFieldIsNull;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldLesser;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldLesserOrEqual;
 use Mediagone\Doctrine\Specifications\Universal\WhereFieldLike;
+use Mediagone\Doctrine\Specifications\Universal\WhereFieldNotIn;
+use Mediagone\Doctrine\Specifications\Universal\WhereFieldNotInArray;
 use function in_array;
 
 
@@ -173,9 +176,19 @@ abstract class SpecificationCompound
         $this->addSpecification(WhereFieldIn::specification($aliasedField, $value));
     }
     
+    final protected function whereFieldNotIn(string $aliasedField, string $value) : void
+    {
+        $this->addSpecification(WhereFieldNotIn::specification($aliasedField, $value));
+    }
+    
     final protected function whereFieldInArray(string $aliasedField, string $paramName, array $values, ?string $paramType = null) : void
     {
         $this->addSpecification(WhereFieldInArray::specification($aliasedField, $paramName, $values, $paramType));
+    }
+    
+    final protected function whereFieldNotInArray(string $aliasedField, string $paramName, array $values, ?string $paramType = null) : void
+    {
+        $this->addSpecification(WhereFieldNotInArray::specification($aliasedField, $paramName, $values, $paramType));
     }
     
     
