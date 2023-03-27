@@ -530,7 +530,7 @@ final class ManyArticles extends SpecificationCompound
 }
 ```
 
-The previous `asModel` method's translate to the following DQL:
+The previous `asModel` method translates to the following DQL:
 ```dql
 SELECT NEW ArticleModel(article.id, article.title, article.content, category.id, category.name) FROM Article article JOIN article.category category
 ```
