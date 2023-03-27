@@ -28,7 +28,7 @@ $articles = $repository->find(
 If you like it, you probably need this package ;)
 
 Combinations of criteria are unlimited, without any code duplication. \
-It will also make hydration of custom *read models* a breeze.
+It will also make hydration of custom *read models* (DTOs) a breeze.
 
 
 ## Summary
@@ -46,7 +46,7 @@ It will also make hydration of custom *read models* a breeze.
     2. [Filter specifications](#spec-filter)
     3. [Additional specifications](#spec-more)
     4. [Debug specifications](#spec-debug)
-5. [Organizing specifications](#organize)
+5. [Naming and organizing specifications](#organize)
 
 ## Installation
 This package requires **PHP 7.4+** and Doctrine **ORM 2.7+**
@@ -59,12 +59,12 @@ $ composer require mediagone/doctrine-specifications
 
 ## <a name="intro"></a>Introduction
 
-The classic _Repository pattern_ (a single class per entity with several methods, one per query) quickly shows its limitations as it grows toward a messy god-class.
+The classic _Repository pattern_ (a single class per entity with several methods, one per query) quickly shows its limitations as it grows toward a big messy class.
 
-Using _[Query Functions](https://ocramius.github.io/doctrine-best-practices/#/90)_ partially solves the problem by splitting up queries into separate classes, but you might still get a lot of code duplication. Things get worse if query criteria can be combined arbitrarily, which may result in the creation of an exponential number of classes. \
-The _[Specifications pattern](https://en.wikipedia.org/wiki/Specification_pattern)_ comes to the rescue helping you to split them into explicit and reusable filters, improving useability and testability of your database queries. This package is a customized flavor of this pattern (for purists), inspired by Benjamin Eberlei's [article](https://beberlei.de/2013/03/04/doctrine_repositories.html). It revolves around a simple concept: _specifications_.
+Using _[Query Functions](https://ocramius.github.io/doctrine-best-practices/#/90)_ partially solves the problem by splitting up queries into separate classes, but you might still get a lot of code duplication. Things get worse if query criteria can be combined arbitrarily, which may result in the creation of an exponential number of classes.
 
-Each specification defines a set of criteria that will be automatically applied to Doctrine's QueryBuilder and Query objects, with the help of two methods:
+The _[Specifications pattern](https://en.wikipedia.org/wiki/Specification_pattern)_ comes to the rescue helping you to split them into explicit and reusable filters, improving useability and testability of your database queries. This package is a customized flavor of this pattern (for purists), inspired by Benjamin Eberlei's [article](https://beberlei.de/2013/03/04/doctrine_repositories.html). It revolves around a simple concept: _specifications_. \
+Each _specification_ defines a set of criteria that will be automatically applied to Doctrine's QueryBuilder and Query objects, with the help of two methods:
 ```php
 abstract class Specification
 {
@@ -73,7 +73,7 @@ abstract class Specification
 }
 ```
 
-Specifications can be combined to build complex queries, while remaining **easily testable and maintainable** separately.
+Specifications can be freely combined to build complex queries, while remaining **easily testable and maintainable** separately.
 
 
 ## <a name="example"></a>Example of usage
@@ -273,14 +273,14 @@ final class ManyArticles extends SpecificationCompound
     
     public function orderedAlphabetically() : self
     {
-        // equivalent to: $builder->addOrderBy('article.title', 'ASC');
+        // equivalent to: $doctrineQuerybuilder->addOrderBy('article.title', 'ASC');
         $this->orderResultsByAsc('article.title');
         return $this;
     }
     
     public function maxCount(int $count) : self
     {
-        // equivalent to: $query->setMaxResults($count);
+        // equivalent to: $doctrineQuerybuilder->setMaxResults($count);
         $this->limitResultsMaxCount($count);
         return $this;
     }
@@ -348,6 +348,8 @@ final class ManyArticles extends SpecificationCompound
             SelectCount::specification(Article::class, 'article')
         );
     }
+    
+    // some filtering methods...
 }
 ```
 Exemple of usage:
@@ -417,7 +419,7 @@ final class ManyArticles extends SpecificationCompound
     public static function byCategoryName(string $categoryName) : self
     {
         // Ignored, since the join was already declared in the constructor,
-        // it would be the same if declared in another method.
+        // it would be the same if declared in another called method.
         $this->joinLeft('article.category', 'category');
         $this->whereFieldEqual('category.name', 'catName', $categoryName);
     }
@@ -434,7 +436,7 @@ final class ManyArticles extends SpecificationCompound
 
 ### <a name="readmodels"></a>Read models
 
-Retrieving data through dedicated classes, instead of entities might be very powerful (if we don't need to update the entity), because it speeds up complex queries (it limits the number of hydrated objects) and allow to flatten relations.
+Retrieving data through dedicated classes, instead of entities might be very powerful (if we don't need to update the entity), because it speeds up complex queries (it limits the number of hydrated objects) and allows to flatten relations.
 
 Let's take these two basic entities:
 ```php
@@ -519,7 +521,8 @@ final class ManyArticles extends SpecificationCompound
     {
         return new self(
             SpecificationRepositoryResult::MANY_OBJECTS,
-            SelectReadModel::specification(Article::class, 'article', ArticleModel::class)
+            SelectReadModel::specification(Article::class, 'article', ArticleModel::class),
+            JoinLeft::specification('article.category', 'category') // Join declaration
         );
     }
     
@@ -527,6 +530,10 @@ final class ManyArticles extends SpecificationCompound
 }
 ```
 
+The previous `asModel` method's translate to the following DQL:
+```dql
+SELECT NEW ArticleModel(article.id, article.title, article.content, category.id, category.name) FROM Article article JOIN article.category category
+```
 
 
 ### <a name="multipleem"></a>Using multiple Entity Managers
@@ -581,27 +588,27 @@ To remove the hassle of creating custom specifications for most common usages, t
 ### <a name="spec-filter"></a>Filter specifications
 Specifications usable in criteria methods:
 
-|Compound method name|Specification name|QueryBuilder condition|
-|---|---|:---:|
-|->whereClause(...)|WhereClause|*custom where clause*|
-|->whereFieldDifferent(...)|WhereFieldDifferent|`field != value`|
-|->whereFieldEqual(...)|WhereFieldEqual|`field = value`|
-|->whereFieldGreater(...)|WhereFieldGreater|`field > value`|
-|->whereFieldGreaterOrEqual(...)|WhereFieldGreaterOrEqual|`field >= value`|
-|->whereFieldLesser(...)|WhereFieldLesser|`field < value`|
-|->whereFieldLesserOrEqual(...)|WhereFieldLesserOrEqual|`field <= value`|
-|->whereFieldIn(...)|WhereFieldIn|`field IN (value)`|
-|->whereFieldInArray(...)|WhereFieldInArray|`field IN (values,generated,list)`|
-|->whereFieldIsNull(...)|WhereFieldIsNull|`field IS NULL`|
-|->whereFieldIsNotNull(...)|WhereFieldIsNotNull|`field IS NOT NULL`|
-|->whereFieldLike(...)|WhereFieldLike|`field LIKE 'value'`|
-|->whereFieldBetween(...)|WhereFieldBetween|`field >= min AND field <= max`|
-|->whereFieldBetweenExclusive(...)|WhereFieldBetweenExclusive|`field > min AND field < max`|
+| Compound method name              | Specification name            |         QueryBuilder condition         |
+|-----------------------------------|-------------------------------|:--------------------------------------:|
+| ->whereClause(...)                | WhereClause                   |         *custom where clause*          |
+| ->whereFieldDifferent(...)        | WhereFieldDifferent           |            `field != value`            |
+| ->whereFieldEqual(...)            | WhereFieldEqual               |            `field = value`             |
+| ->whereFieldGreater(...)          | WhereFieldGreater             |            `field > value`             |
+| ->whereFieldGreaterOrEqual(...)   | WhereFieldGreaterOrEqual      |            `field >= value`            |
+| ->whereFieldLesser(...)           | WhereFieldLesser              |            `field < value`             |
+| ->whereFieldLesserOrEqual(...)    | WhereFieldLesserOrEqual       |            `field <= value`            |
+| ->whereFieldIn(...)               | WhereFieldIn                  |           `field IN (value)`           |
 | ->whereFieldNotIn(...)            | WhereFieldNotIn               |         `field NOT IN (value)`         |
+| ->whereFieldInArray(...)          | WhereFieldInArray             |   `field IN (values,generated,list)`   |
 | ->whereFieldNotInArray(...)       | WhereFieldNotInArray          | `field NOT IN (values,generated,list)` |
+| ->whereFieldIsNull(...)           | WhereFieldIsNull              |            `field IS NULL`             |
+| ->whereFieldIsNotNull(...)        | WhereFieldIsNotNull           |          `field IS NOT NULL`           |
+| ->whereFieldLike(...)             | WhereFieldLike                |          `field LIKE 'value'`          |
+| ->whereFieldBetween(...)          | WhereFieldBetween             |    `field >= min AND field <= max`     |
+| ->whereFieldBetweenExclusive(...) | WhereFieldBetweenExclusive    |     `field > min AND field < max`      |
 ||||
-|->orderResultsByAsc(...)|OrderResultsByAsc|`ORDER BY expression ASC`|
-|->orderResultsByDesc(...)|OrderResultsByDesc|`ORDER BY expression DESC`|
+| ->orderResultsByAsc(...)          | OrderResultsByAsc             |       `ORDER BY expression ASC`        |
+| ->orderResultsByDesc(...)         | OrderResultsByDesc            |       `ORDER BY expression DESC`       |
 
 Example of usage:
 
