@@ -314,9 +314,10 @@ _Notes:_
 ### <a name="formats"></a>Return formats
 
 The package allows results to get retrieved in different formats:
-- **MANY_OBJECTS** : returns an *array of hydrated objects* (similar to QueryBuilder `getResult()`)
-- **SINGLE_OBJECT** : returns a *single hydrated object* or *null* (similar to `getOneOrNullResult()`)
-- **SINGLE_SCALAR** : returns a *single scalar* (similar to `getSingleScalarResult()`)
+- **MANY_OBJECTS** : returns an *array of hydrated objects* (similar to `$query->getResult()`)
+- **MANY_OBJECTS_AS_ITERABLE** : returns an **iterator** over the query results (similar to `$query->toIterable()`)
+- **SINGLE_OBJECT** : returns a *single hydrated object* or *null* (similar to `$query->getOneOrNullResult()`)
+- **SINGLE_SCALAR** : returns a *single scalar* (similar to `$query->getSingleScalarResult()`)
 
 Thereby, you can use the same specifications for different result types by adding multiple _static factory methods_ in a compound.
 ```php

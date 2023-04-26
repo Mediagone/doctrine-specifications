@@ -50,6 +50,9 @@ final class SpecificationRepository
         if ($compound->getRepositoryResult() === SpecificationRepositoryResult::MANY_OBJECTS) {
             return $query->getResult();
         }
+        if ($compound->getRepositoryResult() === SpecificationRepositoryResult::MANY_OBJECTS_AS_ITERABLE) {
+            return $query->toIterable();
+        }
         if ($compound->getRepositoryResult() === SpecificationRepositoryResult::SINGLE_OBJECT) {
             return $query->getOneOrNullResult();
         }

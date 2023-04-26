@@ -8,4 +8,5 @@ final class SpecificationRepositoryResult
     public const MANY_OBJECTS = 0;
     public const SINGLE_OBJECT = 1;
     public const SINGLE_SCALAR = 2;
+    public const MANY_OBJECTS_AS_ITERABLE = 3;
 }
