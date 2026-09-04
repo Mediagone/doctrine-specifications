@@ -50,6 +50,12 @@ class WhereFieldNotInArray extends Specification
     
     final public function modifyBuilder(QueryBuilder $builder) : void
     {
+        // Mirrors WhereFieldInArray: excluding nothing is always true, so the clause is dropped rather than 
+        // turned into an invalid "NOT IN ()".
+        if ($this->values === []) {
+            return;
+        }
+        
         $params = [];
         $placeholders = [];
         

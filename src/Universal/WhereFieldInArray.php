@@ -50,6 +50,15 @@ class WhereFieldInArray extends Specification
     
     final public function modifyBuilder(QueryBuilder $builder) : void
     {
+        // An empty set contains nothing, so the condition is always false. Why?
+        // Emitting no clause at all would instead silently widen the results, which is the dangerous reading when the
+        // array holds the values a user is allowed to see. Callers that mean "no values given, so no filter" must skip
+        // this specification explicitly.
+        if ($this->values === []) {
+            $builder->andWhere('1 = 0');
+            return;
+        }
+        
         $params = [];
         $placeholders = [];
         
